@@ -1,14 +1,23 @@
 {
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+  "name": "adh-vaccine-tracker-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "d3": "^7.0.0",
+    "leaflet": "^1.7.1",
+    "normalize.css": "^8.0.1",
+    "parcel-bundler": "^1.12.5",
+    "vue": "^2.6.14"
   },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
-    "svelte": "^3.37.0",
-    "vite": "^2.4.0"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./ "
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
