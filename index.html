@@ -114,7 +114,7 @@
               <div class="vaccine-bar vaccine-bar-top vaccine-bar-top-green" :style="{width: (currentOverview.total_vaccinations /  currentVaccinesBought.grand_total) * 100 + '%'}">{{ currentOverview.total_vaccinations | formatMillions}}</div>
             </div>
             <div class="right-main-label">Vaccines Received:</div>
-            <div class="right-main-value">
+            <div class="right-main-value" v-if="currentCountry !== 'Africa'">
               <div class="vaccine-bar vaccine-bar-top" :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">{{ currentVaccinesBought.grand_total | formatMillions}}</div>
             </div>
             <div class="right-main-label">Vaccinations per 100:</div>
