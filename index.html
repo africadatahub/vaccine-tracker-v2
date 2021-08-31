@@ -18,7 +18,24 @@
     <div class="header">
       <div class="header-inner">
         <div class="header-inner-title">Vaccines in Africa</div>
-
+        <nav id="nav" >
+          <div class="nav-item dropdown" @click="countryDropdown = !countryDropdown">
+            Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
+            <div class="dropdown-menu" v-if="countryDropdown">
+              <div class="dropdown-item" v-for="country in countries" @click="showCountry(country.iso_code)">{{
+                country.location }}</div>
+            </div>
+          </div>
+          <div class="nav-item chart-hidden">[ Nav Item ]</div>
+          <div class="nav-item chart-hidden">[ Nav Item ]</div>
+          <div class="nav-item chart-hidden">[ Nav Item ]</div>
+          <div class="selected-box" v-if="currentCountry !== 'Africa'">
+            <div class="selected-flag"
+            :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
+            {{ currentCountry }} <div class="close-selected" @click="resetSelection"><img src="/images/close-circle.svg"></div>
+          </div>
+        </nav>
+        
       </div>
     </div>
     <div class="container">
@@ -28,31 +45,12 @@
                 
               </header> -->
 
-      <nav id="nav" >
-        <div class="nav-item dropdown" @click="countryDropdown = !countryDropdown">
-          {{ currentCountry }}<img class="select-arrow" alt="down-arrow" src="images/down-arrow.svg">
-          <div class="dropdown-menu" v-if="countryDropdown">
-            <div class="dropdown-item" v-for="country in countries" @click="showCountry(country.iso_code)">{{
-              country.location }}</div>
-          </div>
-        </div>
-        <div class="nav-item chart-hidden">[ Nav Item ]</div>
-        <div class="nav-item chart-hidden">[ Nav Item ]</div>
-        <div class="nav-item chart-hidden">[ Nav Item ]</div>
-      </nav>
+      
 
 
 
       <section id="small-charts">
-        <div class="chart chart-top-title">
-          <div class="box-flag"
-            :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
-          <div>{{ currentCountry }}</div>
-
-
-
-
-        </div>
+        
         <div class="chart">
           <div class="chart-title">Total vaccinations per 100 people</div>
           <div class="chart-wrap">
@@ -111,8 +109,14 @@
             <div class="right-main-value">{{ currentOverview.date_of_report}}</div>
             <div class="right-main-label">Population:</div>
             <div class="right-main-value">{{ currentOverview.population | formatMillions}}</div>
-            <div class="right-main-label">Total Vaccinations:</div>
-            <div class="right-main-value">{{ currentOverview.total_vaccinations | formatMillions}}</div>
+            <div class="right-main-label">Vaccinations Administered:</div>
+            <div class="right-main-value">
+              <div class="vaccine-bar vaccine-bar-top vaccine-bar-top-green" :style="{width: (currentOverview.total_vaccinations /  currentVaccinesBought.grand_total) * 100 + '%'}">{{ currentOverview.total_vaccinations | formatMillions}}</div>
+            </div>
+            <div class="right-main-label">Vaccines Received:</div>
+            <div class="right-main-value">
+              <div class="vaccine-bar vaccine-bar-top" :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">{{ currentVaccinesBought.grand_total | formatMillions}}</div>
+            </div>
             <div class="right-main-label">Vaccinations per 100:</div>
             <div class="right-main-value">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
             <!-- <div class="right-main-label">Total Vaccinations To Date:</div>
@@ -128,9 +132,9 @@
               
               <div class="vaccine-label">Via Covax</div>
               <div class="vaccine-number">
-                <div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.Covax / (maxSources * 1.2) * 100 + '%'}"></div>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.Covax < 1">{{currentVaccinesBought.Covax | formatNumber}}</span>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.Covax > 0">{{currentVaccinesBought.Covax | formatMillions}}</span>
+                <div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.covax / (maxSources * 1.2) * 100 + '%'}"></div>
+                <span class="vaccine-bar-label" v-if="currentVaccinesBought.covax < 1">{{currentVaccinesBought.covax | formatNumber}}</span>
+                <span class="vaccine-bar-label" v-if="currentVaccinesBought.covax > 0">{{currentVaccinesBought.covax | formatMillions}}</span>
                 
                 </div>
 
@@ -143,6 +147,12 @@
               
                 <div class="vaccine-label">Via donation</div>
               <div class="vaccine-number"><div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
+              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated < 1">{{currentVaccinesBought.donated | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated > 0">{{currentVaccinesBought.donated | formatMillions}}</span>
+            </div>
+
+            <div class="vaccine-label">Total received</div>
+              <div class="vaccine-number">
               <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated < 1">{{currentVaccinesBought.donated | formatNumber}}</span>
               <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated > 0">{{currentVaccinesBought.donated | formatMillions}}</span>
             </div>

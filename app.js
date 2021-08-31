@@ -17,7 +17,7 @@ const vm = new Vue({
   el: '#app',
   data() {
     return {
-      sources: ['Covax', 'bought', 'donated'],
+      sources: ['covax', 'bought', 'donated'],
       vaccines: [
         'Covaxin',
         'Johnson & Johnson',
@@ -83,7 +83,7 @@ const vm = new Vue({
       this.getMaxVaccineTypes()
       this.getMaxVaccineSources()
 
-      this.currentVaccinesBought.Covax = +this.currentVaccinesBought.Covax
+      this.currentVaccinesBought.covax = +this.currentVaccinesBought.covax
       this.currentVaccinesBought.bought = +this.currentVaccinesBought.bought
       this.currentVaccinesBought.borrowed = +this.currentVaccinesBought.borrowed
       this.currentVaccinesBought.donated = +this.currentVaccinesBought.donated
@@ -115,9 +115,10 @@ const vm = new Vue({
         .then((response) => response.json())
         .then((response) => {
           response.forEach((d) => {
-            d.Covax = +d.Covax
+            d.covax = +d.covax
             d.bought = +d.bought
             d.donated = +d.donated
+            d.grant_total = +d.grand_total
           })
           this.vaccinesBought = response
         })
