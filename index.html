@@ -17,7 +17,8 @@
     <div class="tooltip" v-html="tooltipContent"></div>
     <div class="header">
       <div class="header-inner">
-        <div class="header-inner-title">Vaccines in Africa</div>
+        <div class="header-inner-title">Vaccines & Vaccinations in Africa</div>
+        <div class="introduction">Select a country from the list below to see details.</div>
         <nav id="nav" >
           <div class="nav-item dropdown" @click="countryDropdown = !countryDropdown">
             Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
@@ -80,11 +81,11 @@
             <div class="box-flag"
               :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
             <div class="card-title">{{ currentCountry }}</div>
-            <div class="reset" @click="resetSelection">Reset</div>
+            <div class="reset" @click="resetSelection" v-if="currentCountry !== 'Africa'">Reset</div>
           </div>
           <div class="box-content">
             <div class="right-main-label">Last Update:</div>
-            <div class="right-main-value">{{ currentOverview.date_of_report}}</div>
+            <div class="right-main-value">{{ currentOverview.date_of_report | formatDate}}</div>
             <div class="right-main-label">Population:</div>
             <div class="right-main-value">{{ currentOverview.population | formatMillions}}</div>
             <div class="right-main-label">Vaccinations Administered:</div>
@@ -104,9 +105,9 @@
 
           </div>
 
-          <div class="vaccines-data" v-if="currentCountry !== 'Africa'">
-            <div class="box-sub-title">Vaccine sources</div>
-            <div class="vaccine-sources">
+          <div class="vaccines-data">
+            <div class="box-sub-title" v-if="currentCountry !== 'Africa'">Vaccine Sources</div>
+            <div class="vaccine-sources" v-if="currentCountry !== 'Africa'">
               
               <div class="vaccine-label">Via Covax</div>
               <div class="vaccine-number">
@@ -136,8 +137,8 @@
             </div>
 
             </div>
-            <div class="box-sub-title">Vaccine types</div>
-            <div class="vaccine-sources">
+            <div class="box-sub-title" v-if="currentCountry !== 'Africa'">Vaccines in Use</div>
+            <div class="vaccine-sources" v-if="currentCountry !== 'Africa'">
               <div class="vaccine-label">Covaxin</div>
               <div class="vaccine-number">
                 <div class="vaccine-bar" :style="{width: currentVaccinesReceived.Covaxin / (maxVaccines * 1.2) * 100 + '%' }"></div>
@@ -188,6 +189,61 @@
               <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sputnik V'] > 0">{{currentVaccinesReceived['Sputnik V'] | formatMillions}}</span>
             </div>
             </div>
+
+            <!-- Africa Data -->
+            <div class="box-sub-title" v-if="currentCountry == 'Africa'">Vaccines in Use</div>
+            <div class="vaccine-sources" v-if="currentCountry == 'Africa'">
+              <div class="vaccine-label">Covaxin</div>
+              <div class="vaccine-number vaccine-number-right">
+                
+                <span class="vaccine-bar-label" v-if="africaOverview['Covaxin'] < 1">{{africaOverview.Covaxin | formatNumber}}</span>
+                <span class="vaccine-bar-label" v-if="africaOverview['Covaxin'] > 0">{{africaOverview.Covaxin | formatMillions}}</span>
+              </div>
+
+              <div class="vaccine-label">Johnson & Johnson</div>
+              <div class="vaccine-number vaccine-number-right">
+                
+                <span class="vaccine-bar-label" v-if="africaOverview['Johnson & Johnson'] < 1">{{africaOverview['Johnson & Johnson'] | formatNumber}}</span>
+                <span class="vaccine-bar-label" v-if="africaOverview['Johnson & Johnson'] > 0">{{africaOverview['Johnson & Johnson'] | formatMillions}}</span>
+              </div>
+              
+              <div class="vaccine-label">Moderna</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="africaOverview['Moderna'] < 1">{{africaOverview['Moderna'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Moderna'] > 0">{{africaOverview['Moderna'] | formatMillions}}</span>
+            </div>
+              
+              <div class="vaccine-label">Oxford-AstraZeneca</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="africaOverview['Oxford-AstraZeneca'] < 1">{{africaOverview['Oxford-AstraZeneca'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Oxford-AstraZeneca'] > 0">{{africaOverview['Oxford-AstraZeneca'] | formatMillions}}</span>
+            </div>
+              
+              <div class="vaccine-label">Pfizer-BioNTech</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="africaOverview['Pfizer-BioNTech'] < 1">{{africaOverview['Pfizer-BioNTech'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Pfizer-BioNTech'] > 0">{{africaOverview['Pfizer-BioNTech'] | formatMillions}}</span>
+            </div>
+              
+              <div class="vaccine-label">Sinopharm</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="africaOverview['Sinopharm'] < 1">{{africaOverview['Sinopharm'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Sinopharm'] > 0">{{africaOverview['Sinopharm'] | formatMillions}}</span>
+            </div>
+
+            <div class="vaccine-label">Sinovac</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinovac'] < 1">{{africaOverview['Sinovac'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Sinovac'] > 0">{{africaOverview['Sinovac'] | formatMillions}}</span>
+            </div>
+              
+              <div class="vaccine-label">Sputnik V</div>
+              <div class="vaccine-number vaccine-number-right">
+              <span class="vaccine-bar-label" v-if="africaOverview['Sputnik V'] < 1">{{africaOverview['Sputnik V'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="africaOverview['Sputnik V'] > 0">{{africaOverview['Sputnik V'] | formatMillions}}</span>
+            </div>
+            </div>
+
           </div>
         </div>
        

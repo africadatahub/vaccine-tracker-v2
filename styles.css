@@ -2,6 +2,7 @@
 :root {
   --nav-color: #ffffff;
   --nav-text: #235563;
+  --red: rgb(212, 97, 97);
 }
 body {
   font-family: 'Work Sans', Arial, Helvetica, sans-serif;
@@ -27,6 +28,12 @@ a {
 .loading-overlay img {
   width: 100px;
   margin-top: 30vh;
+}
+
+.introduction {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
 }
 h1 {
   font-size: 2em;
@@ -225,15 +232,15 @@ nav {
 }
 .reset {
   float: right;
-  background: #fff;
-  padding: 5px 5px;
+
+  padding: 5px 10px;
   font-size: 70%;
   text-transform: uppercase;
-  border: solid 1px #dadada;
+  /* border: solid 1px #dadada; */
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
-  background: #235563;
+  background: var(--red);
   color: #fff;
 }
 .reset:hover {
@@ -418,7 +425,11 @@ svg {
   padding-bottom: 5px;
   text-align: left;
   border-bottom: solid 1px rgb(233, 233, 233);
-  font-size: 80%;
+  font-size: 100%;
+}
+.vaccine-number-right {
+  /* background: red; */
+  text-align: right;
 }
 .vaccine-bar {
   background: indianred;
@@ -429,6 +440,7 @@ svg {
   margin-right: 5px;
   transition: 0.5s all;
 }
+
 .vaccine-bar-two {
   background: #618591;
 }
@@ -436,16 +448,17 @@ svg {
   /* width: 100%; */
   background: #618590;
   color: #fff;
-  font-size: 80%;
+  font-size: 100%;
   padding: 0px 5px;
   float: right;
   transition: 0.5s all;
   /* width: 100px; */
   max-width: 100%;
   margin: 0px;
+  transform: translate(0, -1.5px);
 }
 .vaccine-bar-top-green {
-  background: rgb(0, 204, 0);
+  background: rgb(1, 150, 1);
   /* padding: 0px; */
   margin: 0px;
 }

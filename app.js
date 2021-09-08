@@ -3,6 +3,8 @@ import L from 'leaflet'
 import * as d3 from 'd3'
 import { africa } from './data/africajson'
 import { countryCodes } from './data/country-codes'
+let parseTime = d3.timeParse('%Y-%m-%d')
+let formatDate = d3.timeFormat('%e %B, %Y')
 
 // let numberFormat = new Intl.NumberFormat()
 Vue.filter('formatNumber', function (value) {
@@ -10,6 +12,10 @@ Vue.filter('formatNumber', function (value) {
 })
 Vue.filter('formatMillions', function (value) {
   return d3.format('.3s')(value).replace(/G/, 'B')
+})
+
+Vue.filter('formatDate', function (value) {
+  return formatDate(parseTime(value))
 })
 
 const vm = new Vue({
