@@ -197,6 +197,12 @@
               <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinopharm'] < 1">{{currentVaccinesReceived['Sinopharm'] | formatNumber}}</span>
               <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinopharm'] > 0">{{currentVaccinesReceived['Sinopharm'] | formatMillions}}</span>
             </div>
+
+            <div class="vaccine-label">Sinovac</div>
+              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived.Sinovac / (maxVaccines * 1.2) * 100 + '%' }"></div>
+              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinovac'] < 1">{{currentVaccinesReceived['Sinovac'] | formatNumber}}</span>
+              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinovac'] > 0">{{currentVaccinesReceived['Sinovac'] | formatMillions}}</span>
+            </div>
               
               <div class="vaccine-label">Sputnik V</div>
               <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived['Sputnik V'] / (maxVaccines * 1.2) * 100 + '%' }"></div>

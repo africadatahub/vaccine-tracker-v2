@@ -361,7 +361,7 @@ let africa = {
         ],
       },
       properties: {
-        ADM0_A3: 'SOL',
+        ADM0_A3: 'SOM',
         NAME_LONG: 'Somaliland',
         CONTINENT: 'Africa',
       },
@@ -472,7 +472,7 @@ let africa = {
         ],
       },
       properties: {
-        ADM0_A3: 'SAH',
+        ADM0_A3: 'ESH',
         NAME_LONG: 'Western Sahara',
         CONTINENT: 'Africa',
       },

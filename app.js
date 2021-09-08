@@ -130,7 +130,6 @@ const vm = new Vue({
         .then((response) => response.json())
         .then((response) => {
           this.vaccinesReceived = response.filter((d) => d.country !== '')
-          console.log(this.vaccinesReceived)
         })
     },
     async getAfricaOverview() {
@@ -150,7 +149,7 @@ const vm = new Vue({
       await fetch(this.countriesUrl)
         .then((data) => data.json())
         .then((data) => {
-          this.countries = data
+          this.countries = data.filter((d) => d.location !== 'Saint Helena')
         })
     },
 
@@ -172,7 +171,9 @@ const vm = new Vue({
     hover(feature) {
       // this.tooltip.style.left = feature.originalEvent.clientX + 100 + 'px'
       // this.tooltip.style.top = feature.originalEvent.clientY + 100 + 'px'
-      let flag = this.convertCode(
+      let flag
+
+      flag = this.convertCode(
         feature.target.feature.properties.ADM0_A3
       )[0].iso_2.toLowerCase()
       flag = `https://hosted.mediahack.co.za/flags/${flag}.svg`

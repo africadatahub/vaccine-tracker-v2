@@ -70,7 +70,7 @@ section {
 }
 #small-charts {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   margin-top: 20px;
 }
@@ -361,9 +361,12 @@ svg {
   transition: 0.5s all;
   /* width: 100px; */
   max-width: 100%;
+  margin: 0px;
 }
 .vaccine-bar-top-green {
   background: rgb(0, 204, 0);
+  /* padding: 0px; */
+  margin: 0px;
 }
 
 .selected-box {
