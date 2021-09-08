@@ -141,6 +141,7 @@ section {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.18);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.18);
+  text-align: center;
 }
 
 .chart-hidden {
@@ -232,9 +233,11 @@ nav {
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
+  background: #235563;
+  color: #fff;
 }
 .reset:hover {
-  background: #e7e7e7;
+  background: #0f6279;
   /* color: #fff; */
 }
 
@@ -243,11 +246,14 @@ nav {
 }
 .chart-wrap {
   grid-gap: 5px;
+  /* text-align: center; */
 }
 .chart-number {
-  font-size: 150%;
+  font-size: 1.6rem;
   padding: 8px 0px 0px;
-  color: #000;
+  color: #235563;
+  font-weight: 700;
+  margin-bottom: 5px;
 }
 .chart-change {
   font-size: 70%;
@@ -507,5 +513,11 @@ svg {
   }
   .div6 {
     display: block;
+  }
+  nav {
+    grid-template-columns: 1fr;
+  }
+  .selected-box {
+    display: none;
   }
 }

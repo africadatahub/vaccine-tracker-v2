@@ -3,7 +3,6 @@ import L from 'leaflet'
 import * as d3 from 'd3'
 import { africa } from './data/africajson'
 import { countryCodes } from './data/country-codes'
-import { style, tickStep } from 'd3'
 
 // let numberFormat = new Intl.NumberFormat()
 Vue.filter('formatNumber', function (value) {
