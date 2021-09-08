@@ -49,9 +49,9 @@
 
 
 
-      <section id="small-charts">
+      
         
-        <div class="chart">
+        <div class="chart div1">
           <div class="chart-title">Total vaccinations per 100 people</div>
           <div class="chart-wrap">
             <div class="chart-left">
@@ -61,7 +61,8 @@
 
           </div>
         </div>
-        <div class="chart">
+
+        <div class="chart div2">
           <div class="chart-title">Total vaccinations</div>
           <div class="chart-wrap">
             <div class="chart-left">
@@ -71,33 +72,8 @@
 
           </div>
         </div>
-        <div class="chart chart-hidden">
-          <div class="chart-title">Chart Title</div>
-          <div class="chart-wrap">
-            <div class="chart-left">
-              <div class="chart-number">XXX.X</div>
 
-            </div>
-
-          </div>
-        </div>
-        <div class="chart chart-hidden">
-          <div class="chart-title">Chart Title</div>
-          <div class="chart-wrap">
-            <div class="chart-left">
-              <div class="chart-number">XXX.X</div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <section id="main">
-        <div class="main-box left-main">
-          <div id="map"></div>
-        </div>
-        <div class="main-box right-main">
+        <div class="main-box right-main div3">
           <div class="box-title">
             <div class="box-flag"
               :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
@@ -212,7 +188,39 @@
             </div>
           </div>
         </div>
-      </section>
+       
+       
+      
+
+  
+        <div class="main-box left-main div4">
+          <div id="map"></div>
+          <div class="notes">
+            <p>Africa Data Hub and the Media Hack Collective sourced the data for this dashboard from countries’ press releases, reputable news sources, the World Health Organisation and Gavi. Although we do our best to bring you updated data, sometimes there are reporting delays of several days.</p>
+<p>We have noted that Rwanda has administered more vaccines than it has received. We are working on why this may be the case.</p>
+<p>In the case of Algeria, where the donation variable is represented as a negative, that is indicative of Algeria’s donation to Tunisia.</p>
+          </div>
+        </div>
+        <div class="chart div5">
+          <div>
+            <a href="https://www.africadatahub.org" target="_blank"><img src="images/adh.png" class="adh-logo"></a>
+          </div>
+          <div class="credit-text">
+          Data: <a href="https://africadatahub.org" taret="_blank">Africa Data Hub</a> & <a href="https://mediahack.co.za" taret="_blank">Media Hack</a></div>
+        <div>
+          <a href="https://mediahack.co.za/" target="_blank"><img src="images/mhc.png" class="mhc-logo"></a>
+        </div>        
+      </div>
+
+      <div class="chart div6">
+        <div class="notes">
+          <p>Africa Data Hub and the Media Hack Collective sourced the data for this dashboard from countries’ press releases, reputable news sources, the World Health Organisation and Gavi. Although we do our best to bring you updated data, sometimes there are reporting delays of several days.</p>
+<p>We have noted that Rwanda has administered more vaccines than it has received. We are working on why this may be the case.</p>
+<p>In the case of Algeria, where the donation variable is represented as a negative, that is indicative of Algeria’s donation to Tunisia.</p>
+        </div>
+      </div>
+       
+  
 
 
 

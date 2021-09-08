@@ -130,6 +130,8 @@ const vm = new Vue({
         .then((response) => response.json())
         .then((response) => {
           this.vaccinesReceived = response.filter((d) => d.country !== '')
+
+          this.updateAfrica()
         })
     },
     async getAfricaOverview() {
@@ -230,6 +232,25 @@ const vm = new Vue({
         apiUrl: '',
         className: feature.properties.ADM0_A3 + ' country',
       }
+    },
+    updateAfrica() {
+      let vaccines = [
+        'Covaxin',
+        'Johnson & Johnson',
+        'Moderna',
+        'Oxford-AstraZeneca',
+        'Pfizer-BioNTech',
+        'Sinopharm',
+        'Sinovac',
+        'Sputnik V',
+      ]
+      vaccines.forEach((v) => {
+        let count = 0
+        this.vaccinesReceived.forEach((vr) => {
+          count = count + +vr[v]
+        })
+        this.africaOverview[v] = count
+      })
     },
   },
   mounted() {
