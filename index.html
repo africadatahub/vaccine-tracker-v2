@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -18,7 +21,7 @@
     <div class="header">
       <div class="header-inner">
         <div class="header-inner-title">Vaccines in Africa</div>
-        <nav id="nav" >
+        <nav id="nav">
           <div class="nav-item dropdown" @click="countryDropdown = !countryDropdown">
             Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
             <div class="dropdown-menu" v-if="countryDropdown">
@@ -31,11 +34,13 @@
           <div class="nav-item chart-hidden">[ Nav Item ]</div>
           <div class="selected-box" v-if="currentCountry !== 'Africa'">
             <div class="selected-flag"
-            :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
-            {{ currentCountry }} <div class="close-selected" @click="resetSelection"><img src="/images/close-circle.svg"></div>
+              :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
+            {{ currentCountry }} <div class="close-selected" @click="resetSelection">
+              <i class="fas fa-times"></i>
+            </div>
           </div>
         </nav>
-        
+
       </div>
     </div>
     <div class="container">
@@ -45,12 +50,12 @@
                 
               </header> -->
 
-      
+
 
 
 
       <section id="small-charts">
-        
+
         <div class="chart">
           <div class="chart-title">Total vaccinations per 100 people</div>
           <div class="chart-wrap">
@@ -96,124 +101,267 @@
       <section id="main">
         <div class="main-box left-main">
           <div id="map"></div>
+          <div class="info-panel">
+            <div class="source-section-wrapper">
+              <div class="source-section">
+                <div class="source-section-left">
+                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank">www.ourworldindata.com</a> </span>
+                </div>
+                <div class="source-section-right">
+                  <span>
+                    <a onclick="embed()"  class="embed">Embed</a>
+                    <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="methology-explainer">
+              <p class="title">Methodology</p>
+              <p class="explainer">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor mauris non viverra dictum. Donec
+                dictum libero ante. Vivamus massa ipsum, fermentum quis scelerisque eu, maximus non ligula. Vestibulum
+                varius risus vitae velit dignissim, quis semper felis lobortis. Maecenas sapien magna, fringilla vel
+                suscipit at, finibus at erat. Nulla placerat semper malesuada.
+              </p>
+            </div>
+          </div>
         </div>
         <div class="main-box right-main">
-          <div class="box-title">
-            <div class="box-flag"
-              :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
-            <div class="card-title">{{ currentCountry }}</div>
-            <div class="reset" @click="resetSelection">Reset</div>
-          </div>
-          <div class="box-content">
-            <div class="right-main-label">Last Update:</div>
-            <div class="right-main-value">{{ currentOverview.date_of_report}}</div>
-            <div class="right-main-label">Population:</div>
-            <div class="right-main-value">{{ currentOverview.population | formatMillions}}</div>
-            <div class="right-main-label">Vaccinations Administered:</div>
-            <div class="right-main-value">
-              <div class="vaccine-bar vaccine-bar-top vaccine-bar-top-green" :style="{width: (currentOverview.total_vaccinations /  currentVaccinesBought.grand_total) * 100 + '%'}">{{ currentOverview.total_vaccinations | formatMillions}}</div>
+          <div class="africa-box">
+            <div class="box-title">
+              <div class="box-flag"
+                :style="{'background-image': `url(https://hosted.mediahack.co.za/flags/${currentFlag})`}"></div>
+              <div class="card-title">{{ currentCountry }}</div>
+              <div class="reset disable" @click="resetSelection" v-if="currentCountry == 'Africa'">Reset</div>
+              <div class="reset" @click="resetSelection" v-else>Reset</div>
             </div>
-            <div class="right-main-label">Vaccines Received:</div>
-            <div class="right-main-value">
-              <div class="vaccine-bar vaccine-bar-top" :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">{{ currentVaccinesBought.grand_total | formatMillions}}</div>
+            <div class="first-box" id="first-data">
+              <div class="item">
+                <div class="first-box-label">Last Update:</div>
+                <div class="first-box-value">{{ currentOverview.date_of_report}}</div>
+              </div>
+              <div class="item">
+                <div class="first-box-label">Population:</div>
+                <div class="first-box-value">{{ currentOverview.population | formatMillions}}</div>
+              </div>
+              <div class="item">
+                <div class="bar" v-if="currentVaccinesBought.grand_total > currentOverview.total_vaccinations "
+                  :style="{width: (currentOverview.total_vaccinations  /  currentVaccinesBought.grand_total) * 100 + '%'}">
+                </div>
+                <div class="first-box-label">Vaccinations Administered:</div>
+                <div class="first-box-value"> {{ currentOverview.total_vaccinations | formatMillions}}</div>
+              </div>
+              <div class="item">
+                <div class="bar vaccine-received-bar"
+                  :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">
+                </div>
+                <div class="first-box-label">Vaccines Received:</div>
+                <div class="first-box-value">{{currentVaccinesBought.grand_total | formatMillions}}</div>
+              </div>
+              <div class="item">
+                <div class="first-box-label">Vaccinations per 100:</div>
+                <div class="first-box-value">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
+              </div>
             </div>
-            <div class="right-main-label">Vaccinations per 100:</div>
-            <div class="right-main-value">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
-            <!-- <div class="right-main-label">Total Vaccinations To Date:</div>
-                    <div class="right-main-value">{{ currentOverview.total_vaccine_doses_to_date | formatNumber}}</div> -->
-
-           
+            <!-- <div class="box-content">
+              <div class="right-main-label">Last Update:</div>
+              <div class="right-main-value">{{ currentOverview.date_of_report}}</div>
+              <div class="right-main-label">Population:</div>
+              <div class="right-main-value">{{ currentOverview.population | formatMillions}}</div>
+              <div class="right-main-label">Vaccinations Administered:</div>
+              <div class="right-main-value">
+                <div class="vaccine-bar vaccine-bar-top vaccine-bar-top-green"
+                  :style="{width: (currentOverview.total_vaccinations /  currentVaccinesBought.grand_total) * 100 + '%'}">
+                  {{ currentOverview.total_vaccinations | formatMillions}}</div>
+              </div>
+              <div class="right-main-label">Vaccines Received:</div>
+              <div class="right-main-value">
+                <div class="vaccine-bar vaccine-bar-top"
+                  :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">{{
+                  currentVaccinesBought.grand_total | formatMillions}}</div>
+              </div>
+              <div class="right-main-label">Vaccinations per 100:</div>
+              <div class="right-main-value">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
+            </div> -->
+            <div class="source-section">
+              <div class="source-section-left">
+                <span>Source: <a href="https://www.ourworldindata.com" target="_blank">www.ourworldindata.com</a> </span>
+              </div>
+              <div class="source-section-right">
+                <span>
+                  <a onclick="embed()"  class="embed">Embed</a>
+                  <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                </span>
+              </div>
+            </div>
 
           </div>
 
           <div class="vaccines-data" v-if="currentCountry !== 'Africa'">
-            <div class="box-sub-title">Vaccine sources</div>
-            <div class="vaccine-sources">
-              
-              <div class="vaccine-label">Via Covax</div>
-              <div class="vaccine-number">
-                <div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.covax / (maxSources * 1.2) * 100 + '%'}"></div>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.covax < 1">{{currentVaccinesBought.covax | formatNumber}}</span>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.covax > 0">{{currentVaccinesBought.covax | formatMillions}}</span>
-                
+            <div class="vaccine-box">
+              <div class="box-sub-title">Vaccine sources</div>
+              <div class="first-box">
+                <div class="item">
+                  <div class="bar covax-bar"
+                    :style="{width: currentVaccinesBought.covax / (maxSources * 1.2) * 100 + '%'}"></div>
+                  <div class="first-box-label">Via Covax</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.covax < 1">{{currentVaccinesBought.covax |formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.covax > 0">{{currentVaccinesBought.covax |formatMillions}}</div>
                 </div>
-
-              <div class="vaccine-label">Bought</div>
-              <div class="vaccine-number">
-                <div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.bought / (maxSources * 1.2) * 100 + '%'}"></div>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.bought < 1">{{currentVaccinesBought.bought | formatNumber}}</span>
-                <span class="vaccine-bar-label" v-if="currentVaccinesBought.bought > 0">{{currentVaccinesBought.bought | formatMillions}}</span>
+                <div class="item">
+                  <div class="bar bought-bar"
+                    :style="{width: currentVaccinesBought.bought / (maxSources * 1.2) * 100 + '%'}"></div>
+                  <div class="first-box-label">Bought</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.bought < 1"> {{currentVaccinesBought.bought
+                    | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.bought > 0"> {{currentVaccinesBought.bought
+                    | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar donation-bar"
+                    :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
+                  <div class="first-box-label">Via Donation</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.donated < 1">
+                    {{currentVaccinesBought.donated | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.donated > 0">
+                    {{currentVaccinesBought.donated | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar total-bar"
+                    :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
+                  <div class="first-box-label">Total received</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.donated < 1">
+                    {{currentVaccinesBought.donated | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesBought.donated > 0">
+                    {{currentVaccinesBought.donated | formatMillions}}</div>
+                </div>
               </div>
-              
-                <div class="vaccine-label">Via donation</div>
-              <div class="vaccine-number"><div class="vaccine-bar vaccine-bar-two" :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated < 1">{{currentVaccinesBought.donated | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated > 0">{{currentVaccinesBought.donated | formatMillions}}</span>
-            </div>
+              <div class="vaccine-sources">
 
-            <div class="vaccine-label">Total received</div>
-              <div class="vaccine-number">
-              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated < 1">{{currentVaccinesBought.donated | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesBought.donated > 0">{{currentVaccinesBought.donated | formatMillions}}</span>
-            </div>
-
-            </div>
-            <div class="box-sub-title">Vaccine types</div>
-            <div class="vaccine-sources">
-              <div class="vaccine-label">Covaxin</div>
-              <div class="vaccine-number">
-                <div class="vaccine-bar" :style="{width: currentVaccinesReceived.Covaxin / (maxVaccines * 1.2) * 100 + '%' }"></div>
-                <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Covaxin'] < 1">{{currentVaccinesReceived.Covaxin | formatNumber}}</span>
-                <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Covaxin'] > 0">{{currentVaccinesReceived.Covaxin | formatMillions}}</span>
               </div>
-
-              <div class="vaccine-label">Johnson & Johnson</div>
-              <div class="vaccine-number">
-                <div class="vaccine-bar" :style="{width: currentVaccinesReceived['Johnson & Johnson'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
-                <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Johnson & Johnson'] < 1">{{currentVaccinesReceived['Johnson & Johnson'] | formatNumber}}</span>
-                <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Johnson & Johnson'] > 0">{{currentVaccinesReceived['Johnson & Johnson'] | formatMillions}}</span>
+              <div class="source-section">
+                <div class="source-section-left">
+                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank" >www.ourworldindata.com</a> </span>
+                </div>
+                <div class="source-section-right">
+                  <span>
+                    <a onclick="embed()"  class="embed">Embed</a>
+                    <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                  </span>
+                </div>
               </div>
-              
-              <div class="vaccine-label">Moderna</div>
-              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived.Moderna / (maxVaccines * 1.2) * 100 + '%' }"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Moderna'] < 1">{{currentVaccinesReceived['Moderna'] | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Moderna'] > 0">{{currentVaccinesReceived['Moderna'] | formatMillions}}</span>
             </div>
-              
-              <div class="vaccine-label">Oxford-AstraZeneca</div>
-              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived['Oxford-AstraZeneca'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Oxford-AstraZeneca'] < 1">{{currentVaccinesReceived['Oxford-AstraZeneca'] | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Oxford-AstraZeneca'] > 0">{{currentVaccinesReceived['Oxford-AstraZeneca'] | formatMillions}}</span>
-            </div>
-              
-              <div class="vaccine-label">Pfizer-BioNTech</div>
-              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived['Pfizer-BioNTech'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Pfizer-BioNTech'] < 1">{{currentVaccinesReceived['Pfizer-BioNTech'] | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Pfizer-BioNTech'] > 0">{{currentVaccinesReceived['Pfizer-BioNTech'] | formatMillions}}</span>
-            </div>
-              
-              <div class="vaccine-label">Sinopharm</div>
-              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived.Sinopharm / (maxVaccines * 1.2) * 100 + '%' }"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinopharm'] < 1">{{currentVaccinesReceived['Sinopharm'] | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sinopharm'] > 0">{{currentVaccinesReceived['Sinopharm'] | formatMillions}}</span>
-            </div>
-              
-              <div class="vaccine-label">Sputnik V</div>
-              <div class="vaccine-number"><div class="vaccine-bar" :style="{width: currentVaccinesReceived['Sputnik V'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sputnik V'] < 1">{{currentVaccinesReceived['Sputnik V'] | formatNumber}}</span>
-              <span class="vaccine-bar-label" v-if="currentVaccinesReceived['Sputnik V'] > 0">{{currentVaccinesReceived['Sputnik V'] | formatMillions}}</span>
-            </div>
+            <div class="vaccine-box last-vaccine-box">
+              <div class="box-sub-title">Vaccine types</div>
+              <div class="first-box">
+                <div class="item">
+                  <div class="bar"
+                  :style="{width: currentVaccinesReceived['Covaxin'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Covaxin</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Covaxin'] < 1"> {{currentVaccinesReceived.Covaxin | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Covaxin'] > 0">{{currentVaccinesReceived.Covaxin | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar jj-bar"
+                  :style="{width: currentVaccinesReceived['Johnson & Johnson'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Johnson & Johnson</div>
+                  <div class="first-box-value"  v-if="currentVaccinesReceived['Johnson & Johnson'] < 1">{{currentVaccinesReceived['Johnson & Johnson'] | formatNumber}}</div>
+                  <div class="first-box-value"  v-if="currentVaccinesReceived['Johnson & Johnson'] > 0"> {{currentVaccinesReceived['Johnson & Johnson'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar"
+                  :style="{width: currentVaccinesReceived['Moderna']  / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Moderna</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Moderna'] < 1">{{currentVaccinesReceived['Moderna'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Moderna'] > 0">{{currentVaccinesReceived['Moderna'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar oxford-bar"
+                  :style="{width: currentVaccinesReceived['Oxford-AstraZeneca'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Oxford-AstraZeneca</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Oxford-AstraZeneca'] < 1">{{currentVaccinesReceived['Oxford-AstraZeneca'] | formatNumber}}</div>
+                  <div class="first-box-value"v-if="currentVaccinesReceived['Oxford-AstraZeneca'] > 0">{{currentVaccinesReceived['Oxford-AstraZeneca'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar"
+                  :style="{width: currentVaccinesReceived['Pfizer-BioNTech'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Pfizer-BioNTech</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Pfizer-BioNTech'] < 1">{{currentVaccinesReceived['Pfizer-BioNTech'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Pfizer-BioNTech'] > 0">{{currentVaccinesReceived['Pfizer-BioNTech'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar sinopharm-bar"
+                  :style="{width: currentVaccinesReceived.Sinopharm / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Sinopharm</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Sinopharm'] < 1"> {{currentVaccinesReceived['Sinopharm'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Sinopharm'] > 0"> {{currentVaccinesReceived['Sinopharm'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar"
+                  :style="{width: currentVaccinesReceived['Sputnik V'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
+                  <div class="first-box-label">Sputnik V</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Sputnik V'] < 1">{{currentVaccinesReceived['Sputnik V'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="currentVaccinesReceived['Sputnik V'] > 0">{{currentVaccinesReceived['Sputnik V'] | formatMillions}}</div>
+                </div>
+              </div>
+              <div class="source-section">
+                <div class="source-section-left">
+                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank" >www.ourworldindata.com</a> </span>
+                </div>
+                <div class="source-section-right">
+                  <span>
+                    <a onclick="embed()"  class="embed">Embed</a>
+                    <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Embeded Code</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+              <div id="iframe"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
   </div>
 
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script>
+    function embed(){
+      console.log('embeded clicked')
+      var url = window.location.href;
+      var div = document.createElement('textarea');
+      var iframe = `<iframe width="700" height="400" src="${url}" frameBorder="0"></iframe>`;
+      div.innerHTML = iframe;
+      var element = document.getElementById('iframe');
+
+      if (!element.hasChildNodes()) {
+      // It has at least one
+        element.appendChild(div);
+      }
+
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    }
+
+  </script>
 </body>
 
 </html>
