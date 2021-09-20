@@ -117,6 +117,7 @@ nav {
   z-index: 4000;
   color: #000;
   font-size: 110%;
+  display: block;
 }
 .dropdown-items {
   position: absolute;
