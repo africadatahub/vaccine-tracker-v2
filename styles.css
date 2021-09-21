@@ -26,8 +26,8 @@ h1 {
 }
 
 .container {
-  width: 90%;
-  max-width: 1000px;
+  /* width: 90%;
+  max-width: 1000px; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -40,8 +40,8 @@ section {
   background: #f8f8f8;
 }
 .header-inner {
-  width: 90%;
-  max-width: 1000px;
+  /* width: 90%;
+  max-width: 1000px; */
   margin-left: auto;
   margin-right: auto;
   font-size: 150%;
@@ -443,7 +443,7 @@ svg {
   margin: 8px 0px;
 }
 .source-section-left, .source-section-right{
-  width: 50%;
+  width: 46%;
   display: inline;
   position: relative;
 }
