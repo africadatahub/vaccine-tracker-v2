@@ -572,6 +572,7 @@ footer{
   width: 100%;
   bottom: 0;
   padding: 25px 0;
+  margin-top: 48px;
 }
 footer span{
   font-family: 'Work Sans';
