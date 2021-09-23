@@ -565,3 +565,19 @@ p.explainer{
 #iframe textarea{
   width: 100%;
 }
+footer{
+  background: #FFFFFF;
+  box-shadow: inset 0px 6px 14px rgb(0 0 0 / 5%);
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  padding: 25px 0;
+}
+footer span{
+  font-family: 'Work Sans';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  color: #155263;
+}

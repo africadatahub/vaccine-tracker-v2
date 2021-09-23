@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,500;0,600;1,700&display=swap');
+body{
+    font-family: 'Work Sans', sans-serif;
+}
+.custom-nav {
+    margin-top: 0 !important;
+}
+.custom-nav-item {
+    background: unset !important;
+}
+.custom-nav-item:hover {
+    background-color: rgba(9, 65, 81, 0.1) !important;
+}
+@media (max-width: 992px){
+    #navigation .navbar-toggler{
+        width: 44px;
+        height: 44px;
+        padding: unset;
+        background-color: rgba(17, 65, 81, 0.1);
+        border: 0px solid;
+        outline: none;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+    #navigation .container{
+        padding: 0;
+    }
+    #navigation .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    #navigation .navbar-toggler{
+        margin-right: 15px;
+    }
+    #navigation .navbar-brand{
+        margin-left: 15px;
+    }
+    #navigation .navbar-brand img{
+        width: 150px;
+        height: 33px;
+    }
+    #navigation .navbar-collapse{
+        background: #e7eced;
+        padding: 25px;
+    }
+    #navigation .social-media{
+        display: none;
+    }
+    #navigation {
+        padding-bottom: 0;
+    }
+}
+@media (min-width: 992px){
+    .mobile-social-media{
+        display: none;
+    }
+    .navbar{
+        height: 70px;
+        background: #FFFFFF;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-expand-lg .navbar-collapse {
+        justify-content: end;
+    }
+    .nav-item{
+        
+        margin-left: 10px;
+    }
+}
+.navbar{
+    background: #FFFFFF;
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+}
+.nav-item .nav-link{
+    font-family: 'Work Sans';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+    color: #155263 !important;
+}
+.nav-link:hover{
+    color: #155263;
+}
+.nav-item{
+    padding: 0.5em;
+    border-radius: 10px;
+}
+.nav-item:hover {
+    background-color: rgba(9, 65, 81, 0.1);
+
+}
+.mobile-social-media{
+    padding-left: 10px;
+    border-top: 1px solid rgba(17, 65, 81, 0.1);
+    padding-top: 25px;
+    margin-top: 14px;
+}
+.social-media-link{
+    margin-right: 30px;
+}
+.social-media-link .fab{
+    font-size: 17px;
+    color: #094151;
+}
