@@ -117,6 +117,7 @@ nav {
   z-index: 4000;
   color: #000;
   font-size: 110%;
+  display: block;
 }
 .dropdown-items {
   position: absolute;
@@ -142,7 +143,8 @@ nav {
   font-size: 90%;
 }
 .dropdown-item:hover {
-  background: #c3dde4;
+  /* background: #c3dde4; */
+  background: #E2E5E6;
 }
 
 #map {
@@ -157,16 +159,22 @@ nav {
   float: right;
   background: #fff;
   padding: 5px 5px;
-  font-size: 70%;
+  font-weight: 500;
+  font-size: 14px;
   text-transform: uppercase;
   border: solid 1px #dadada;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 500;
+  color: #000000;
 }
 .reset:hover {
   background: #e7e7e7;
   /* color: #fff; */
+}
+.reset.disable, .reset.disable:hover{
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
 }
 
 .chart-title {
@@ -251,7 +259,8 @@ svg {
   color: rgb(133, 133, 133);
 }
 .right-main {
-  padding: 20px;
+  height: fit-content;
+  background-color: transparent;
 }
 .right-main .box-title {
   font-size: 120%;
@@ -264,10 +273,11 @@ svg {
   display: inline-block;
 }
 .box-sub-title {
-  font-size: 110%;
-  font-weight: 700;
-  margin-bottom: 5px;
-  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #EBEBEB;
+  /* margin-top: 15px; */
 }
 .box-flag,
 .selected-flag {
@@ -299,15 +309,20 @@ svg {
   line-height: 180%;
 }
 .right-main-label {
+  color: #929292;
   font-weight: 500;
   border-bottom: solid 1px rgb(233, 233, 233);
   margin-bottom: 3px;
+  font-size: 13px;
+  font-weight: 500;
 }
 .right-main-value {
-  color: rgb(129, 129, 129);
+  color: rgb(0, 0, 0);
   text-align: right;
   border-bottom: solid 1px rgb(233, 233, 233);
   margin-bottom: 3px;
+  font-weight: 500;
+  font-size: 13px;
 }
 .chart-top-title {
   display: grid;
@@ -328,16 +343,20 @@ svg {
   grid-template-columns: 2fr 3fr;
 }
 .vaccine-label {
+  color: #929292;
   padding-top: 5px;
   padding-bottom: 5px;
   border-bottom: solid 1px rgb(233, 233, 233);
+  font-size: 13px;
+  font-weight: 500;
 }
 .vaccine-number {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: left;
   border-bottom: solid 1px rgb(233, 233, 233);
-  font-size: 80%;
+  font-weight: 500;
+  font-size: 13px;
 }
 .vaccine-bar {
   background: indianred;
@@ -353,25 +372,30 @@ svg {
 }
 .vaccine-bar-top {
   /* width: 100%; */
-  background: #618590;
-  color: #fff;
-  font-size: 80%;
+  background: #C0F0FF;
+  color: #000000;
   padding: 0px 5px;
   float: right;
   transition: 0.5s all;
   /* width: 100px; */
   max-width: 100%;
+  font-weight: 500;
+  font-size: 13px;
 }
 .vaccine-bar-top-green {
-  background: rgb(0, 204, 0);
+  background:#BDEECB;
+  font-weight: 500;
+  font-size: 13px;
+  color: #000000;
 }
 
 .selected-box {
   font-size: 60%;
   padding: 8px 10px 10px 10px;
-  background: #235563;
-  color: #fff;
+  background:  #DFE6E8;
+  color: #000000;
   border-radius: 5px;
+  font-weight: 500;
 }
 .selected-box * {
   display: inline-block;
@@ -402,4 +426,142 @@ svg {
   #small-charts {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.vaccine-box, .africa-box{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.last-vaccine-box{
+  margin-bottom: 0px;
+}
+.source-section{
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0px;
+}
+.source-section-left, .source-section-right{
+  width: 50%;
+  display: inline;
+  position: relative;
+}
+.source-section-right{
+  display: inline-flex;
+  justify-content: flex-end;
+  top: 8px;
+  right: -16px;
+}
+.source-section-left{
+  top: 6px;
+}
+.source-section-left span{
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #848484;
+}
+.source-section-left span a{
+  text-decoration: underline;
+  color: #848484;
+}
+.embed, .download-data{
+  background: #DFE6E8;
+  border-radius: 4px;
+  padding: 5px 13px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: 'Work Sans';
+  text-decoration: none;
+}
+.info-panel{
+  padding: 5px;
+  /* position: absolute;
+  bottom: 0; */
+}
+.source-section-wrapper{
+  border-top: 1px solid #EBEBEB;
+  border-bottom: 1px solid #EBEBEB;
+  padding-bottom: 15px;
+}
+p.title{
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+  font-family: 'Work Sans';
+}
+p.explainer{
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.63);
+  font-family: 'Work Sans';
+  line-height: 170%;
+}
+.info-panel .source-section-wrapper .source-section .source-section-right{
+  right: -32px;
+}
+/* .africa-box{
+  width: 100%;
+} */
+.first-box{
+  border-bottom: 1px solid #EBEBEB;
+}
+.first-box-label, .first-box-value{
+  width: 50%;
+  display: inline;
+  position: relative;
+}
+.first-box-label{
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #929292;
+  margin-left: 5px;
+}
+.first-box-value {
+  float: right;
+  text-align: right;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #000000;
+}
+.item{
+  padding: 5px 0px;
+  position: relative;
+  margin: 2px 0px;
+}
+.bar{
+  position: absolute;
+  background: #BDEECB;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 3px;
+
+}
+.vaccine-received-bar{
+  background: #C0F0FF;
+}
+.covax-bar, .bought-bar, .donation-bar{
+  background: #E1F8FF;
+}
+.total-bar{
+  background: #C0F0FF;
+}
+.jj-bar{
+  background: #C1B2EB;
+}
+.oxford-bar{
+  background: #EEC698;
+}
+.sinopharm-bar{
+  background: #E8F0B8;
+}
+.left-main{
+  height: fit-content;
+}
+#iframe textarea{
+  width: 100%;
 }
