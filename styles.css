@@ -75,7 +75,7 @@ section {
   margin-top: 20px;
 }
 .chart {
-  padding: 10px;
+  padding: 20px 15px;
   background: #fff;
   border-radius: 6px;
 }
@@ -92,16 +92,19 @@ nav {
 }
 .nav-item {
   background: #235563;
-  padding: 10px 10px;
+  padding: 10px 15px;
   border-radius: 6px;
   font-weight: 400;
   cursor: pointer;
-  font-size: 60%;
+  font-size: 16px;
   color: #fff;
 }
 .select-arrow {
   float: right;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+.dropdown.ml-0{
+  margin-left: 0;
 }
 .dropdown {
   display: relative;
@@ -140,7 +143,7 @@ nav {
 .dropdown-item {
   padding: 5px 10px;
   font-weight: 400;
-  font-size: 90%;
+  font-size: 16px;
 }
 .dropdown-item:hover {
   /* background: #c3dde4; */
@@ -158,7 +161,7 @@ nav {
 .reset {
   float: right;
   background: #fff;
-  padding: 5px 5px;
+  padding: 5px 15px;
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
@@ -178,7 +181,9 @@ nav {
 }
 
 .chart-title {
-  font-size: 90%;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
 }
 .chart-wrap {
   display: grid;
@@ -186,9 +191,12 @@ nav {
   grid-gap: 5px;
 }
 .chart-number {
-  font-size: 150%;
+  font-size: 30px;
   padding: 8px 0px;
   color: #000;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
 }
 .chart-change {
   font-size: 70%;
@@ -213,7 +221,7 @@ svg {
   top: 20px;
   left: 20px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.849);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   font-size: 90%;
   border: solid 1px #eee;
@@ -222,6 +230,7 @@ svg {
   -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.31);
   -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.31);
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.31);
+  opacity: 0.8;
   display: none;
 }
 
@@ -441,6 +450,7 @@ svg {
   width: 100%;
   box-sizing: border-box;
   margin: 8px 0px;
+  margin-left: 6px;
 }
 .source-section-left, .source-section-right{
   width: 46%;
@@ -451,7 +461,7 @@ svg {
   display: inline-flex;
   justify-content: flex-end;
   top: 8px;
-  right: -16px;
+  right: -13px;
 }
 .source-section-left{
   top: 6px;
@@ -466,6 +476,9 @@ svg {
   text-decoration: underline;
   color: #848484;
 }
+.download-data{
+  margin-left: 10px;
+}
 .embed, .download-data{
   background: #DFE6E8;
   border-radius: 4px;
@@ -475,6 +488,7 @@ svg {
   font-size: 14px;
   font-family: 'Work Sans';
   text-decoration: none;
+  cursor: pointer;
 }
 .info-panel{
   padding: 5px;
@@ -491,6 +505,7 @@ p.title{
   font-size: 12px;
   color: #000000;
   font-family: 'Work Sans';
+  padding-top: 15px;
 }
 p.explainer{
   font-size: 12px;
@@ -499,7 +514,7 @@ p.explainer{
   line-height: 170%;
 }
 .info-panel .source-section-wrapper .source-section .source-section-right{
-  right: -32px;
+  right: -27px;
 }
 /* .africa-box{
   width: 100%;
@@ -519,6 +534,9 @@ p.explainer{
   color: #929292;
   margin-left: 5px;
 }
+.first-box-value.pr-0{
+  padding-right: 0;
+}
 .first-box-value {
   float: right;
   text-align: right;
@@ -526,11 +544,13 @@ p.explainer{
   font-size: 13px;
   line-height: 15px;
   color: #000000;
+  padding-right: 5px;
 }
 .item{
-  padding: 5px 0px;
+  padding: 2.5px 0px;
   position: relative;
   margin: 2px 0px;
+  display: flex;
 }
 .bar{
   position: absolute;
