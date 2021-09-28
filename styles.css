@@ -502,7 +502,7 @@ svg {
   cursor: pointer;
 }
 .info-panel{
-  padding: 5px;
+  padding: 15px;
   /* position: absolute;
   bottom: 0; */
 }
@@ -525,7 +525,7 @@ p.explainer{
   line-height: 170%;
 }
 .info-panel .source-section-wrapper .source-section .source-section-right{
-  right: -23px;
+  right: -13px;
 }
 /* .africa-box{
   width: 100%;
