@@ -99,6 +99,9 @@ nav {
   font-size: 16px;
   color: #fff;
 }
+.nav-item:hover {
+  background: #235563;
+}
 .select-arrow {
   float: right;
   margin-top: 10px;
@@ -305,8 +308,9 @@ svg {
 }
 
 .selected-flag {
-  width: 15px;
-  height: 15px;
+  width: 29px;
+  height: 29px;
+  margin-right: 10px;
 }
 .card-title {
   /* width: 80%; */
@@ -399,26 +403,34 @@ svg {
 }
 
 .selected-box {
-  font-size: 60%;
+  font-size: 16px;
   padding: 8px 10px 10px 10px;
   background:  #DFE6E8;
   color: #000000;
   border-radius: 5px;
   font-weight: 500;
+  width: fit-content;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
 }
 .selected-box * {
   display: inline-block;
 }
 .selected-flag {
   transform: translate(0, 2px);
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .close-selected {
-  display: relative;
+  position: relative;
   float: right;
   padding: 0px;
   cursor: pointer;
-
+  margin-left: 15px;
+  margin-right: 15px;
   transform: translate(0, 3px);
+  top: -3px;
 }
 .close-selected img {
   width: 15px;
@@ -453,7 +465,7 @@ svg {
   margin-left: 6px;
 }
 .source-section-left, .source-section-right{
-  width: 46%;
+  width: 47%;
   display: inline;
   position: relative;
 }
@@ -461,10 +473,11 @@ svg {
   display: inline-flex;
   justify-content: flex-end;
   top: 8px;
-  right: -13px;
+  right: -7px;
 }
 .source-section-left{
   top: 6px;
+  margin-left: -6px;
 }
 .source-section-left span{
   font-weight: 500;
@@ -482,7 +495,7 @@ svg {
 .embed, .download-data{
   background: #DFE6E8;
   border-radius: 4px;
-  padding: 5px 13px;
+  padding: 5px 15px;
   color: #000000;
   font-weight: 500;
   font-size: 14px;
@@ -514,7 +527,7 @@ p.explainer{
   line-height: 170%;
 }
 .info-panel .source-section-wrapper .source-section .source-section-right{
-  right: -27px;
+  right: -23px;
 }
 /* .africa-box{
   width: 100%;
