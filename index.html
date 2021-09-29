@@ -71,10 +71,10 @@
     <div class="loading-overlay" v-if="loading"><img src="images/loading.svg"></div>
     <div class="tooltip" v-html="tooltipContent"></div>
     <div class="header">
-      <div class="header-inner">
-        <div class="header-inner-title">Vaccines in Africa</div>
+      <div class="header-inner container">
+        <div class="header-inner-title">COVID Vaccine Tracker</div>
         <nav id="nav">
-          <div class="nav-item dropdown" @click="countryDropdown = !countryDropdown">
+          <div class="nav-item dropdown ml-0" @click="countryDropdown = !countryDropdown">
             Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
             <div class="dropdown-menu" v-if="countryDropdown">
               <div class="dropdown-item" v-for="country in countries" @click="showCountry(country.iso_code)">{{
@@ -157,11 +157,11 @@
             <div class="source-section-wrapper">
               <div class="source-section">
                 <div class="source-section-left">
-                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank">www.ourworldindata.com</a> </span>
+                  <span>Source: <a href="https://www.africadatahub.org/" target="_blank">Africa Data Hub (by Media Hack Collective)</a> </span>
                 </div>
                 <div class="source-section-right">
                   <span>
-                    <a id='embedClick' class="embed">Embed</a>
+                    <a @click="embeddedCode" class="embed">Embed</a>
                     <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
                   </span>
                 </div>
@@ -189,30 +189,30 @@
             </div>
             <div class="first-box" id="first-data">
               <div class="item">
-                <div class="first-box-label">Last Update:</div>
-                <div class="first-box-value">{{ currentOverview.date_of_report}}</div>
+                <div class="first-box-label">Last Update</div>
+                <div class="first-box-value pr-0">{{ currentOverview.date_of_report}}</div>
               </div>
               <div class="item">
-                <div class="first-box-label">Population:</div>
-                <div class="first-box-value">{{ currentOverview.population | formatMillions}}</div>
+                <div class="first-box-label">Population</div>
+                <div class="first-box-value pr-0">{{ currentOverview.population | formatMillions}}</div>
               </div>
               <div class="item">
                 <div class="bar" v-if="currentVaccinesBought.grand_total > currentOverview.total_vaccinations "
                   :style="{width: (currentOverview.total_vaccinations  /  currentVaccinesBought.grand_total) * 100 + '%'}">
                 </div>
-                <div class="first-box-label">Vaccinations Administered:</div>
+                <div class="first-box-label">Total Vaccinations Administered</div>
                 <div class="first-box-value"> {{ currentOverview.total_vaccinations | formatMillions}}</div>
               </div>
               <div class="item">
                 <div class="bar vaccine-received-bar"
                   :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">
                 </div>
-                <div class="first-box-label">Vaccines Received:</div>
+                <div class="first-box-label">Total Vaccines Received</div>
                 <div class="first-box-value">{{currentVaccinesBought.grand_total | formatMillions}}</div>
               </div>
               <div class="item">
-                <div class="first-box-label">Vaccinations per 100:</div>
-                <div class="first-box-value">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
+                <div class="first-box-label">Total Vaccinations per 100 People</div>
+                <div class="first-box-value pr-0">{{ currentOverview.total_vaccinations_per_hundred | formatNumber}}</div>
               </div>
             </div>
             <!-- <div class="box-content">
@@ -237,11 +237,11 @@
             </div> -->
             <div class="source-section">
               <div class="source-section-left">
-                <span>Source: <a href="https://www.ourworldindata.com" target="_blank">www.ourworldindata.com</a> </span>
+                <span>Source: <a href="https://www.africadatahub.org/" target="_blank">Africa Data Hub (by Media Hack Collective)</a> </span>
               </div>
               <div class="source-section-right">
                 <span>
-                  <a id='embedClick1'  class="embed">Embed</a>
+                  <a @click="embeddedCode"  class="embed">Embed</a>
                   <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
                 </span>
               </div>
@@ -281,7 +281,7 @@
                 <div class="item">
                   <div class="bar total-bar"
                     :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
-                  <div class="first-box-label">Total received</div>
+                  <div class="first-box-label">Total Vaccines Received</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.donated < 1">
                     {{currentVaccinesBought.donated | formatNumber}}</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.donated > 0">
@@ -293,11 +293,11 @@
               </div>
               <div class="source-section">
                 <div class="source-section-left">
-                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank" >www.ourworldindata.com</a> </span>
+                  <span>Source: <a href="https://www.africadatahub.org/" target="_blank" >Africa Data Hub (by Media Hack Collective)</a> </span>
                 </div>
                 <div class="source-section-right">
                   <span>
-                    <a onclick='clickMe()'class="embed">Embed</a>
+                    <a @click="embeddedCode" class="embed">Embed</a>
                     <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
                   </span>
                 </div>
@@ -356,13 +356,13 @@
                   <div class="first-box-value" v-if="currentVaccinesReceived['Sputnik V'] > 0">{{currentVaccinesReceived['Sputnik V'] | formatMillions}}</div>
                 </div>
               </div>
-              <div class="source-section">
+              <div class="source-section ">
                 <div class="source-section-left">
-                  <span>Source: <a href="https://www.ourworldindata.com" target="_blank" >www.ourworldindata.com</a> </span>
+                  <span>Source: <a href="https://www.africadatahub.org/" target="_blank" >Africa Data Hub (by Media Hack Collective)</a> </span>
                 </div>
                 <div class="source-section-right">
                   <span>
-                    <a onclick='clickMe()' class="embed">Embed</a>
+                    <a @click="embeddedCode" class="embed">Embed</a>
                     <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
                   </span>
                 </div>
@@ -373,7 +373,7 @@
       </section>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -406,31 +406,6 @@
 
   <script src="app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-  <script>
-document.onload
-function clickMe(){
-  console.log('embeded clicked')
-      var url = window.location.href;
-      var div = document.createElement('textarea');
-      var iframe = `<iframe width="700" height="400" src="${url}" frameBorder="0"></iframe>`;
-      div.innerHTML = iframe;
-      var element = document.getElementById('iframe');
-
-      if (!element.hasChildNodes()) {
-      // It has at least one
-        element.appendChild(div);
-      }
-
-      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-        keyboard: false
-      });
-      myModal.show();
-}
-    document.getElementById('embedClick').addEventListener('click',clickMe)
-    document.getElementById('embedClick1').addEventListener('click',clickMe)
-    document.getElementById('embedClick2').addEventListener('click',clickMe)
-    document.getElementById('embedClick3').addEventListener('click',clickMe)
-  </script>
 </body>
 
 </html>

@@ -230,6 +230,24 @@ const vm = new Vue({
         className: feature.properties.ADM0_A3 + ' country',
       }
     },
+    embeddedCode(){
+      console.log('embeded clicked')
+      var url = window.location.href;
+      var div = document.createElement('textarea');
+      var iframe = `<iframe width="700" height="400" src="${url}" frameBorder="0"></iframe>`;
+      div.innerHTML = iframe;
+      var element = document.getElementById('iframe');
+
+      if (!element.hasChildNodes()) {
+      // It has at least one
+        element.appendChild(div);
+      }
+
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    }
   },
   mounted() {
     this.tooltip = document.querySelector('.tooltip')
