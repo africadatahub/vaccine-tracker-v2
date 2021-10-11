@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+   <title>ADH - Vaccine Tracker</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://assets.website-files.com/6017e7ecb14082cec5d531af/6070172a89dbc227ca8268ca_adh-favicon.png" rel="shortcut icon" type="image/x-icon">
 
   <script>
     window.Userback = window.Userback || {};
@@ -28,7 +29,7 @@
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav" id="navigation">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="https://www.africadatahub.org/">
           <img src="https://assets.website-files.com/6017e7ecb14082cec5d531af/605dc8591d244b03000f013c_adh-logo.svg" alt="Logo">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +73,15 @@
     <div class="tooltip" v-html="tooltipContent"></div>
     <div class="header">
       <div class="header-inner container">
-        <div class="header-inner-title">COVID Vaccine Tracker</div>
+        <div class="container d-flex align-items-center">
+          <div class="row w-100">
+            <div class="col-12 p-0">
+              <!-- <div class="header-inner-title">COVID Vaccine Tracker</div> -->
+              <h3 class="title">COVID Vaccine Tracker</h3>
+              <a class="btn-back" href="https://www.africadatahub.org/"><i class="fas fa-arrow-left"></i> Back</a>
+            </div>
+          </div>
+        </div>
         <nav id="nav">
           <div class="nav-item dropdown ml-0" @click="countryDropdown = !countryDropdown">
             Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
