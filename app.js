@@ -3,7 +3,8 @@ import L from 'leaflet'
 import * as d3 from 'd3'
 import { africa } from './data/africajson'
 import { countryCodes } from './data/country-codes'
-import { style, tickStep } from 'd3'
+let parseTime = d3.timeParse('%Y-%m-%d')
+let formatDate = d3.timeFormat('%e %B, %Y')
 
 // let numberFormat = new Intl.NumberFormat()
 Vue.filter('formatNumber', function (value) {
@@ -11,6 +12,10 @@ Vue.filter('formatNumber', function (value) {
 })
 Vue.filter('formatMillions', function (value) {
   return d3.format('.3s')(value).replace(/G/, 'B')
+})
+
+Vue.filter('formatDate', function (value) {
+  return formatDate(parseTime(value))
 })
 
 const vm = new Vue({
@@ -130,7 +135,8 @@ const vm = new Vue({
         .then((response) => response.json())
         .then((response) => {
           this.vaccinesReceived = response.filter((d) => d.country !== '')
-          console.log(this.vaccinesReceived)
+
+          this.updateAfrica()
         })
     },
     async getAfricaOverview() {
@@ -150,7 +156,7 @@ const vm = new Vue({
       await fetch(this.countriesUrl)
         .then((data) => data.json())
         .then((data) => {
-          this.countries = data
+          this.countries = data.filter((d) => d.location !== 'Saint Helena')
         })
     },
 
@@ -172,7 +178,9 @@ const vm = new Vue({
     hover(feature) {
       // this.tooltip.style.left = feature.originalEvent.clientX + 100 + 'px'
       // this.tooltip.style.top = feature.originalEvent.clientY + 100 + 'px'
-      let flag = this.convertCode(
+      let flag
+
+      flag = this.convertCode(
         feature.target.feature.properties.ADM0_A3
       )[0].iso_2.toLowerCase()
       flag = `https://hosted.mediahack.co.za/flags/${flag}.svg`
@@ -230,6 +238,25 @@ const vm = new Vue({
         className: feature.properties.ADM0_A3 + ' country',
       }
     },
+    updateAfrica() {
+      let vaccines = [
+        'Covaxin',
+        'Johnson & Johnson',
+        'Moderna',
+        'Oxford-AstraZeneca',
+        'Pfizer-BioNTech',
+        'Sinopharm',
+        'Sinovac',
+        'Sputnik V',
+      ]
+      vaccines.forEach((v) => {
+        let count = 0
+        this.vaccinesReceived.forEach((vr) => {
+          count = count + +vr[v]
+        })
+        this.africaOverview[v] = count
+      })
+    },
     embeddedCode(){
       console.log('embeded clicked')
       var url = window.location.href;
@@ -237,17 +264,17 @@ const vm = new Vue({
       var iframe = `<iframe width="700" height="400" src="${url}" frameBorder="0"></iframe>`;
       div.innerHTML = iframe;
       var element = document.getElementById('iframe');
-
+    
       if (!element.hasChildNodes()) {
       // It has at least one
         element.appendChild(div);
       }
-
+    
       var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
         keyboard: false
       });
       myModal.show();
-    }
+    },
   },
   mounted() {
     this.tooltip = document.querySelector('.tooltip')
