@@ -197,7 +197,7 @@
                 <div class="first-box-value pr-0">{{ currentOverview.population | formatMillions}}</div>
               </div>
               <div class="item">
-                <div class="bar" v-if="currentOverview.total_vaccinations > currentVaccinesBought.grand_total "
+                <div class="bar" v-if="currentOverview.total_vaccinations < currentVaccinesBought.grand_total "
                   :style="{width: (currentOverview.total_vaccinations /  currentVaccinesBought.grand_total) * 100 + '%'}">
                 </div>
                 <div class="first-box-label">Total Vaccinations Administered</div>
@@ -306,6 +306,7 @@
               <div class="first-box">
                 <div class="item">
                   <div class="bar"
+                  v-if="currentVaccinesReceived['Covaxin']"
                   :style="{width: currentVaccinesReceived.Covaxin / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Covaxin</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Covaxin'] < 1"> {{currentVaccinesReceived.Covaxin | formatNumber}}</div>
@@ -313,6 +314,7 @@
                 </div>
                 <div class="item">
                   <div class="bar jj-bar"
+                  v-if="currentVaccinesReceived['Johnson & Johnson']"
                   :style="{width: currentVaccinesReceived['Johnson & Johnson'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Johnson & Johnson</div>
                   <div class="first-box-value"  v-if="currentVaccinesReceived['Johnson & Johnson'] < 1">{{currentVaccinesReceived['Johnson & Johnson'] | formatNumber}}</div>
@@ -320,6 +322,7 @@
                 </div>
                 <div class="item">
                   <div class="bar"
+                  v-if="currentVaccinesReceived['Moderna']"
                   :style="{width: currentVaccinesReceived.Moderna / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Moderna</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Moderna'] < 1">{{currentVaccinesReceived['Moderna'] | formatNumber}}</div>
@@ -327,6 +330,7 @@
                 </div>
                 <div class="item">
                   <div class="bar oxford-bar"
+                  v-if="currentVaccinesReceived['Oxford-AstraZeneca']"
                   :style="{width: currentVaccinesReceived['Oxford-AstraZeneca'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Oxford-AstraZeneca</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Oxford-AstraZeneca'] < 1">{{currentVaccinesReceived['Oxford-AstraZeneca'] | formatNumber}}</div>
@@ -334,6 +338,7 @@
                 </div>
                 <div class="item">
                   <div class="bar"
+                  v-if="currentVaccinesReceived['Pfizer-BioNTech']"
                   :style="{width: currentVaccinesReceived['Pfizer-BioNTech'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Pfizer-BioNTech</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Pfizer-BioNTech'] < 1">{{currentVaccinesReceived['Pfizer-BioNTech'] | formatNumber}}</div>
@@ -341,6 +346,7 @@
                 </div>
                 <div class="item">
                   <div class="bar sinopharm-bar"
+                  v-if="currentVaccinesReceived['Sinopharm']"
                   :style="{width: currentVaccinesReceived.Sinopharm / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Sinopharm</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Sinopharm'] < 1"> {{currentVaccinesReceived['Sinopharm'] | formatNumber}}</div>
@@ -348,6 +354,7 @@
                 </div>
                 <div class="item">
                   <div class="bar sinopharm-bar"
+                  v-if="currentVaccinesReceived['Sinovac']"
                   :style="{width: currentVaccinesReceived.Sinovac / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Sinovac</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Sinovac'] < 1"> {{currentVaccinesReceived['Sinovac'] | formatNumber}}</div>
@@ -355,6 +362,7 @@
                 </div>
                 <div class="item">
                   <div class="bar"
+                  v-if="currentVaccinesReceived['Sputnik V']"
                   :style="{width: currentVaccinesReceived['Sputnik V'] / (maxVaccines * 1.2) * 100 + '%' }"></div>
                   <div class="first-box-label">Sputnik V</div>
                   <div class="first-box-value" v-if="currentVaccinesReceived['Sputnik V'] < 1">{{currentVaccinesReceived['Sputnik V'] | formatNumber}}</div>
