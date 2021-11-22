@@ -130,7 +130,7 @@ const vm = new Vue({
         })
     },
      // New Function Written here that gets the Vaccine Sources
-    // async function get_vaccine_sources() {
+    // async  get_vaccine_sources() {
     //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php')
     //     .then((response) => response.json())
     //     .then((response) => {
@@ -149,6 +149,8 @@ const vm = new Vue({
     //       })
     //     })
     // },
+
+    
     async getVaccinesReceived() {
       await fetch(
         'https://api.datadesk.co.za/csvjson.php?table=vaccines_received_africa_3682450'
@@ -161,8 +163,8 @@ const vm = new Vue({
         })
     },
 
-    // // New Function Written here that gets the Vaccine Types
-    // async function get_vaccine_types() {
+    // New Function Written here that gets the Vaccine Types
+    // async  get_vaccine_types() {
     //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php')
     //     .then((response) => response.json())
     //     .then((response) => {
@@ -179,7 +181,7 @@ const vm = new Vue({
     //         }, 0)
     //       })
     //     })
-    // }
+    // },
 
     async getAfricaOverview() {
       await fetch(
