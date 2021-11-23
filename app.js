@@ -114,12 +114,14 @@ const vm = new Vue({
         })
     },
     async getVaccinesBought() {
+      let vaccine_sources = 'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php'
       await fetch(
-        'https://api.datadesk.co.za/csvjson.php?table=africa_vaccines_bought_and_donated_1989143'
+        vaccine_sources
       )
         .then((response) => response.json())
         .then((response) => {
           response.forEach((d) => {
+            
             d.covax = +d.covax
             d.bought = +d.bought
             d.donated = +d.donated
@@ -128,17 +130,70 @@ const vm = new Vue({
           this.vaccinesBought = response
         })
     },
+     // New Function Written here that gets the Vaccine Sources
+    // async  get_vaccine_sources() {
+    //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php')
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       vaxSources = response
+  
+    //       vaxSources.forEach((v) => {
+    //         vaxSourcesList.forEach((d) => {
+    //           v[d] = +v[d]
+    //         })
+    //       })
+  
+    //       vaxSourcesList.forEach((d) => {
+    //         africaSources[d] = vaxSources.reduce((total, number) => {
+    //           return total + +number[d]
+    //         }, 0)
+    //       })
+    //     })
+    // },
+
+    
     async getVaccinesReceived() {
       await fetch(
-        'https://api.datadesk.co.za/csvjson.php?table=vaccines_received_africa_3682450'
+        'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php'
       )
         .then((response) => response.json())
         .then((response) => {
+          response.forEach(i=>{
+            i.Covaxin = +i.Covaxin
+            i.Johnson_and_Johnson = +i.Johnson_and_Johnson
+            i.Moderna = +i.Moderna
+            i.Oxford_AstraZeneca = +i.Oxford_AstraZeneca
+            i.Pfizer_BioNTech = +i.Pfizer_BioNTech
+            i.Sinopharm = +i.Sinopharm
+            i.Sinovac = +i.Sinovac
+            i.Sputnik_V = +i.Sputnik_V
+          })
           this.vaccinesReceived = response.filter((d) => d.country !== '')
-
+          
           this.updateAfrica()
         })
     },
+
+    // New Function Written here that gets the Vaccine Types
+    // async  get_vaccine_types() {
+    //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php')
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       vaxTypes = response
+    //       vaxTypes.forEach((v) => {
+    //         vaxTypesList.forEach((d) => {
+    //           v[d] = +v[d]
+    //         })
+    //       })
+  
+    //       vaxTypesList.forEach((d) => {
+    //         africaTypes[d] = vaxTypes.reduce((total, number) => {
+    //           return total + +number[d]
+    //         }, 0)
+    //       })
+    //     })
+    // },
+
     async getAfricaOverview() {
       await fetch(
         'https://api.mediahack.co.za/adh/vaccine-tracker/africa-overview.php'
