@@ -51,6 +51,7 @@ const vm = new Vue({
       vaccinesReceived: [],
       currentVaccinesBought: [],
       currentVaccinesReceived: [],
+      currentHover:[]
     }
   },
   methods: {
@@ -77,6 +78,24 @@ const vm = new Vue({
       let newCode = countryCodes.filter((e) => e.iso_3 === inCode)
       return newCode
     },
+    async getCurrentHover(iso){
+      await fetch(
+        `https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-by-country.php?cc=${iso}`
+      )
+        .then((data) => data.json())
+        .then((data) => {
+          data[data.length - 1].total_vaccinations =
+            data[data.length - 1].total_vaccine_doses_to_date
+          data[data.length - 1].total_vaccinations_per_hundred = (
+            (+data[data.length - 1].total_vaccine_doses_to_date /
+              +data[0].population) *
+            100
+          ).toFixed(2)
+          data[data.length - 1].total_vaccinations = +data[data.length - 1].total_vaccinations
+          this.currentHover= data[data.length - 1]
+          
+        })
+    },
     showCountry(iso) {
       this.currentVaccinesBought = this.vaccinesBought.filter(
         (d) => d.iso_code === iso
@@ -96,7 +115,6 @@ const vm = new Vue({
         +this.currentVaccinesBought.grand_total
 
       this.currentFlag = this.convertCode(iso)[0].iso_2.toLowerCase() + '.svg'
-
       let overview = fetch(
         `https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-by-country.php?cc=${iso}`
       )
@@ -112,6 +130,7 @@ const vm = new Vue({
           ).toFixed(2)
           this.currentOverview = data[data.length - 1]
         })
+
     },
     async getVaccinesBought() {
       let vaccine_sources = 'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php'
@@ -233,21 +252,25 @@ const vm = new Vue({
     hover(feature) {
       // this.tooltip.style.left = feature.originalEvent.clientX + 100 + 'px'
       // this.tooltip.style.top = feature.originalEvent.clientY + 100 + 'px'
-      let flag
 
+      //Set current overview to hovered country
+      let iso = feature.target.feature.properties.ADM0_A3
+      this.getCurrentHover(iso)
+      let flag
       flag = this.convertCode(
         feature.target.feature.properties.ADM0_A3
       )[0].iso_2.toLowerCase()
       flag = `https://hosted.mediahack.co.za/flags/${flag}.svg`
 
       this.tooltipContent = `<div class='title'><div class="flag"></div>
-      <div class="title-text">${feature.target.feature.properties.NAME_LONG}</div>
+      <div class="title-text">${feature.target.feature.properties.NAME_LONG}</div><br>
+      <div class="vaccine-stats"><span class="vaccine-title">Vaccinations per 100 : <span class="vaccine-digit" style="font-weight: 400;">${this.currentHover.total_vaccinations_per_hundred}</span></span></div><br>
+      <div class="vaccine-stats"><span class="vaccine-title">Total Vaccinations : <span class="vaccine-digit" style="font-weight: 400;">${(this.currentHover.total_vaccinations /1000000).toFixed(2)}M</span></span></div>
       </div>`
       // this.tooltipContent += `<div class="tooltip-content">
 
       // </div>`
       this.tooltip.style.display = 'block'
-      let iso = feature.target.feature.properties.ADM0_A3
       document.querySelector('.' + iso).style.fill = '#3A6775'
 
       setTimeout(() => {
