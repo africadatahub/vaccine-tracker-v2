@@ -51,6 +51,7 @@ const vm = new Vue({
       vaccinesReceived: [],
       currentVaccinesBought: [],
       currentVaccinesReceived: [],
+      newAfricaOverview: []
     }
   },
   methods: {
@@ -200,6 +201,7 @@ const vm = new Vue({
       )
         .then((data) => data.json())
         .then((data) => {
+          console.log(data)
           data.forEach((d) => {
             d.date_of_report = d.date
           })
@@ -310,7 +312,11 @@ const vm = new Vue({
           count = count + +vr[v]
         })
         this.africaOverview[v] = count
-      })
+        this.newAfricaOverview = this.africaOverview
+
+
+      }),
+      console.log(this.newAfricaOverview)
     },
     embeddedCode(){
       console.log('embeded clicked')
