@@ -51,7 +51,8 @@ const vm = new Vue({
       vaccinesReceived: [],
       currentVaccinesBought: [],
       currentVaccinesReceived: [],
-      newAfricaOverview: []
+      africaOverviewSource: [],
+      africaOverviewTypes: []
     }
   },
   methods: {
@@ -127,8 +128,11 @@ const vm = new Vue({
             d.bought = +d.bought
             d.donated = +d.donated
             d.grant_total = +d.grand_total
+            this.vaccinesBought = d.grant_total
           })
           this.vaccinesBought = response
+          // console.log(this.vaccinesBought)
+          this.updateAfricaTypes()
         })
     },
      // New Function Written here that gets the Vaccine Sources
@@ -207,6 +211,7 @@ const vm = new Vue({
           })
           this.africaOverview = data[0]
           this.currentOverview = data[0]
+          this.africaOverviewTypes = data[0]
         })
     },
     async getCountries() {
@@ -312,11 +317,28 @@ const vm = new Vue({
           count = count + +vr[v]
         })
         this.africaOverview[v] = count
-        this.newAfricaOverview = this.africaOverview
+        this.africaOverviewSource = this.africaOverview
+        console.log(this.africaOverviewSource)
 
 
-      }),
-      console.log(this.newAfricaOverview)
+      })
+    },
+    updateAfricaTypes() {
+      let sources = [
+        'covax', 
+        'bought', 
+        'donated'
+      ]
+      sources.forEach((v) => {
+        let count = 0
+        this.vaccinesBought.forEach((vr) => {
+          count = count + +vr[v]
+        })
+        this.africaOverviewTypes[v] = count
+
+        console.log(this.africaOverviewTypes)
+
+      })
     },
     embeddedCode(){
       console.log('embeded clicked')
@@ -345,6 +367,8 @@ const vm = new Vue({
       this.getVaccinesReceived(),
       this.getCountries(),
       this.addAfricaMap(),
+      // this.updateAfrica(),
+      // this.updateAfricaTypes(),
     ]).then(() => {
       this.loading = false
     })
