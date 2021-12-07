@@ -51,7 +51,8 @@ const vm = new Vue({
       vaccinesReceived: [],
       currentVaccinesBought: [],
       currentVaccinesReceived: [],
-      currentHover:[]
+      africaOverviewSource: [],
+      africaOverviewTypes: []
     }
   },
   methods: {
@@ -145,8 +146,11 @@ const vm = new Vue({
             d.bought = +d.bought
             d.donated = +d.donated
             d.grant_total = +d.grand_total
+            this.vaccinesBought = d.grant_total
           })
           this.vaccinesBought = response
+          // console.log(this.vaccinesBought)
+          this.updateAfricaTypes()
         })
     },
      // New Function Written here that gets the Vaccine Sources
@@ -219,11 +223,14 @@ const vm = new Vue({
       )
         .then((data) => data.json())
         .then((data) => {
+          console.log('currentOverview', data)
           data.forEach((d) => {
             d.date_of_report = d.date
           })
           this.africaOverview = data[0]
           this.currentOverview = data[0]
+          this.africaOverviewTypes = data[0]
+          //console.log('currentOverview', data[0] )
         })
     },
     async getCountries() {
@@ -319,21 +326,45 @@ const vm = new Vue({
     updateAfrica() {
       let vaccines = [
         'Covaxin',
-        'Johnson & Johnson',
+        'Johnson_and_Johnson',
         'Moderna',
-        'Oxford-AstraZeneca',
-        'Pfizer-BioNTech',
+        'Oxford_AstraZeneca',
+        'Pfizer_BioNTech',
         'Sinopharm',
         'Sinovac',
-        'Sputnik V',
+        'Sputnik_V',
       ]
+      
       vaccines.forEach((v) => {
         let count = 0
         this.vaccinesReceived.forEach((vr) => {
-          count = count + +vr[v]
+          if(vr[v]){
+            count = count + +vr[v]
+
+          }
         })
         this.africaOverview[v] = count
+        this.africaOverviewSource = this.africaOverview
+
       })
+      console.log('africaOverviewSource', this.africaOverviewSource)
+      
+    },
+    updateAfricaTypes() {
+      let sources = [
+        'covax', 
+        'bought', 
+        'donated'
+      ]
+      sources.forEach((v) => {
+        let count = 0
+        this.vaccinesBought.forEach((vr) => {
+          count = count + +vr[v]
+        })
+        this.africaOverviewTypes[v] = count
+
+      })
+      console.log('africaOverviewTypes', this.africaOverviewTypes)
     },
     embeddedCode(){
       console.log('embeded clicked')
@@ -362,6 +393,8 @@ const vm = new Vue({
       this.getVaccinesReceived(),
       this.getCountries(),
       this.addAfricaMap(),
+      // this.updateAfrica(),
+      // this.updateAfricaTypes(),
     ]).then(() => {
       this.loading = false
     })
