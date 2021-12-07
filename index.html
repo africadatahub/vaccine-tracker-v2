@@ -399,7 +399,7 @@
                 <div class="item">
                   <div class="bar covax-bar"
                     :style="{width: africaOverviewTypes.covax / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax) * 100 + '%'}"></div>
-                  <div class="first-box-label">Via Covax</div>
+                  <div class="first-box-label">Covax</div>
                   <div class="first-box-value" v-if="africaOverviewTypes.covax < 1">{{africaOverviewTypes.covax | formatNumber}}</div>
                   <div class="first-box-value" v-if="africaOverviewTypes.covax > 0">{{africaOverviewTypes.covax | formatMillions}}</div>
                 </div>
@@ -413,7 +413,7 @@
                 <div class="item">
                   <div class="bar donation-bar"
                     :style="{width: africaOverviewTypes.donated / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax) * 100 + '%'}"></div>
-                  <div class="first-box-label">Via Donation</div>
+                  <div class="first-box-label">Donation</div>
                   <div class="first-box-value" v-if="africaOverviewTypes.donated < 1">
                     {{africaOverviewTypes.donated | formatNumber}}</div>
                   <div class="first-box-value" v-if="africaOverviewTypes.donated > 0">

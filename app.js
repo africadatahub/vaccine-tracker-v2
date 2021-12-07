@@ -232,6 +232,7 @@ const vm = new Vue({
           this.africaOverviewTypes = data[0]
           //console.log('currentOverview', data[0] )
         })
+        this.updateAfricaTypes()
     },
     async getCountries() {
       await fetch(this.countriesUrl)
@@ -394,7 +395,7 @@ const vm = new Vue({
       this.getCountries(),
       this.addAfricaMap(),
       // this.updateAfrica(),
-      // this.updateAfricaTypes(),
+     
     ]).then(() => {
       this.loading = false
     })
