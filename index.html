@@ -391,6 +391,141 @@
               </div>
             </div>
           </div>
+          <!-- africa -->
+          <div class="vaccines-data" v-if="currentCountry == 'Africa'">
+            <div class="vaccine-box">
+              <div class="box-sub-title">Vaccine sources</div>
+              <div class="first-box">
+                <div class="item">
+                  <div class="bar covax-bar"
+                    :style="{width: africaOverviewTypes.covax / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax) * 100 + '%'}"></div>
+                  <div class="first-box-label">Via Covax</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.covax < 1">{{africaOverviewTypes.covax | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.covax > 0">{{africaOverviewTypes.covax | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar bought-bar"
+                    :style="{width: africaOverviewTypes.bought / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax) * 100 + '%'}"></div>
+                  <div class="first-box-label">Bought</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.bought < 1"> {{africaOverviewTypes.bought | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.bought > 0"> {{africaOverviewTypes.bought | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar donation-bar"
+                    :style="{width: africaOverviewTypes.donated / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax) * 100 + '%'}"></div>
+                  <div class="first-box-label">Via Donation</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.donated < 1">
+                    {{africaOverviewTypes.donated | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.donated > 0">
+                    {{africaOverviewTypes.donated | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar total-bar"
+                    :style="{width: 100 + '%'}"></div>
+                  <div class="first-box-label">Total Vaccines Received</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.donated < 1">
+                    {{africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewTypes.donated > 0">
+                    {{africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax | formatMillions}}</div>
+                </div>
+              </div>
+              <div class="vaccine-sources">
+
+              </div>
+              <div class="source-section">
+                <div class="source-section-left">
+                  <span>Source: <a href="https://www.africadatahub.org/" target="_blank" >Africa Data Hub (by Media Hack Collective)</a> </span>
+                </div>
+                <div class="source-section-right">
+                  <span>
+                    <a @click="embeddedCode" class="embed">Embed</a>
+                    <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="vaccine-box last-vaccine-box">
+              <div class="box-sub-title">Vaccine types</div>
+              <div class="first-box">
+                <div class="item">
+                  <div class="bar "
+                  v-if="africaOverviewSource.Covaxin"
+                  :style="{width: africaOverviewSource.Covaxin / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Covaxin</div>
+                  <div class="first-box-value" v-if="africaOverviewSource.Covaxin < 1"> {{africaOverviewSource.Covaxin | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource.Covaxin > 0">{{africaOverviewSource.Covaxin | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar jj-bar"
+                  v-if="africaOverviewSource.Johnson_and_Johnson"
+                  :style="{width: africaOverviewSource.Johnson_and_Johnson / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Johnson & Johnson</div>
+                  <div class="first-box-value"  v-if="africaOverviewSource.Johnson_and_Johnson < 1">{{africaOverviewSource.Johnson_and_Johnson | formatNumber}}</div>
+                  <div class="first-box-value"  v-if="africaOverviewSource.Johnson_and_Johnson > 0"> {{africaOverviewSource.Johnson_and_Johnson | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar"
+                  v-if="africaOverviewSource['Moderna']"
+                  :style="{width: africaOverviewSource.Moderna / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Moderna</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Moderna'] < 1">{{africaOverviewSource['Moderna'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Moderna'] > 0">{{africaOverviewSource['Moderna'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar oxford-bar"
+                  v-if="africaOverviewSource['Oxford_AstraZeneca']"
+                  :style="{width: africaOverviewSource['Oxford_AstraZeneca'] / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Oxford-AstraZeneca</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Oxford_AstraZeneca'] < 1">{{africaOverviewSource['Oxford_AstraZeneca'] | formatNumber}}</div>
+                  <div class="first-box-value"v-if="africaOverviewSource['Oxford_AstraZeneca'] > 0">{{africaOverviewSource['Oxford_AstraZeneca'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar oxford-bar"
+                  v-if="africaOverviewSource['Pfizer_BioNTech']"
+                  :style="{width: africaOverviewSource['Pfizer_BioNTech'] / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Pfizer-BioNTech</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Pfizer_BioNTech'] < 1">{{africaOverviewSource['Pfizer_BioNTech'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Pfizer_BioNTech'] > 0">{{africaOverviewSource['Pfizer_BioNTech'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar sinopharm-bar"
+                  v-if="africaOverviewSource['Sinopharm']"
+                  :style="{width: africaOverviewSource.Sinopharm / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Sinopharm</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sinopharm'] < 1"> {{africaOverviewSource['Sinopharm'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sinopharm'] > 0"> {{africaOverviewSource['Sinopharm'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar sinopharm-bar"
+                  v-if="africaOverviewSource['Sinovac']"
+                  :style="{width: africaOverviewSource.Sinovac / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Sinovac</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sinovac'] < 1"> {{africaOverviewSource['Sinovac'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sinovac'] > 0">{{africaOverviewSource['Sinovac'] | formatMillions}}</div>
+                </div>
+                <div class="item">
+                  <div class="bar"
+                  v-if="africaOverviewSource['Sputnik_V']"
+                  :style="{width: africaOverviewSource['Sputnik_V'] / (africaOverviewTypes.donated + africaOverviewTypes.bought + africaOverviewTypes.covax ) * 100 + '%' }"></div>
+                  <div class="first-box-label">Sputnik V</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sputnik_V'] < 1">{{africaOverviewSource['Sputnik_V'] | formatNumber}}</div>
+                  <div class="first-box-value" v-if="africaOverviewSource['Sputnik_V'] > 0">{{africaOverviewSource['Sputnik_V'] | formatMillions}}</div>
+                </div>
+              </div>
+              <div class="source-section ">
+                <div class="source-section-left">
+                  <span>Source: <a href="https://www.africadatahub.org/" target="_blank" >Africa Data Hub (by Media Hack Collective)</a> </span>
+                </div>
+                <div class="source-section-right">
+                  <span>
+                    <a @click="embeddedCode" class="embed">Embed</a>
+                    <a href="https://api.mediahack.co.za/adh/countries.csv" class="download-data" download>Download data</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
