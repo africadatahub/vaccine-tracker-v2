@@ -265,7 +265,7 @@
                 <div class="item">
                   <div class="bar covax-bar"
                     :style="{width: currentVaccinesBought.covax / (maxSources * 1.2) * 100 + '%'}"></div>
-                  <div class="first-box-label">Via Covax</div>
+                  <div class="first-box-label">Covax</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.covax < 1">{{currentVaccinesBought.covax | formatNumber}}</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.covax > 0">{{currentVaccinesBought.covax | formatMillions}}</div>
                 </div>
@@ -279,7 +279,7 @@
                 <div class="item">
                   <div class="bar donation-bar"
                     :style="{width: currentVaccinesBought.donated / (maxSources * 1.2) * 100 + '%'}"></div>
-                  <div class="first-box-label">Via Donation</div>
+                  <div class="first-box-label">Donation</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.donated < 1">
                     {{currentVaccinesBought.donated | formatNumber}}</div>
                   <div class="first-box-value" v-if="currentVaccinesBought.donated > 0">
