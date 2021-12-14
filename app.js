@@ -1,12 +1,14 @@
-import Vue from 'vue/dist/vue.esm.js'
-import L from 'leaflet'
-import * as d3 from 'd3'
-import { africa } from './data/africajson'
-import { countryCodes } from './data/country-codes'
+import Vue from 'vue/dist/vue.esm.js';
+import L from 'leaflet';
+import * as d3 from 'd3';
+import { africa } from './data/africajson';
+import { countryCodes } from './data/country-codes';
+import Gradient from 'javascript-color-gradient';
+import _ from 'lodash';
+
 let parseTime = d3.timeParse('%Y-%m-%d')
 let formatDate = d3.timeFormat('%e %B, %Y')
 
-// let numberFormat = new Intl.NumberFormat()
 Vue.filter('formatNumber', function (value) {
   return Intl.NumberFormat().format(value)
 })
@@ -52,10 +54,13 @@ const vm = new Vue({
       currentVaccinesBought: [],
       currentVaccinesReceived: [],
       africaOverviewSource: [],
-      africaOverviewTypes: []
+      africaOverviewTypes: [],
+      mapData: [],
+      absScale: new Gradient()
     }
   },
   methods: {
+
     getMaxVaccineTypes() {
       this.maxVaccines = 0
       this.vaccines.forEach((d) => {
@@ -63,6 +68,7 @@ const vm = new Vue({
           this.maxVaccines = +this.currentVaccinesReceived[d]
       })
     },
+
     getMaxVaccineSources() {
       this.maxSources = 0
       this.sources.forEach((d) => {
@@ -70,15 +76,18 @@ const vm = new Vue({
           this.maxSources = +this.currentVaccinesBought[d]
       })
     },
+
     resetSelection() {
       this.currentCountry = 'Africa'
       this.currentFlag = 'africa.svg'
       this.currentOverview = this.africaOverview
     },
+
     convertCode(inCode) {
       let newCode = countryCodes.filter((e) => e.iso_3 === inCode)
       return newCode
     },
+
     async getCurrentHover(iso){
       await fetch(
         `https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-by-country.php?cc=${iso}`
@@ -97,6 +106,7 @@ const vm = new Vue({
           
         })
     },
+
     showCountry(iso) {
       this.currentVaccinesBought = this.vaccinesBought.filter(
         (d) => d.iso_code === iso
@@ -131,8 +141,8 @@ const vm = new Vue({
           ).toFixed(2)
           this.currentOverview = data[data.length - 1]
         })
-
     },
+
     async getVaccinesBought() {
       let vaccine_sources = 'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php'
       await fetch(
@@ -149,31 +159,9 @@ const vm = new Vue({
             this.vaccinesBought = d.grant_total
           })
           this.vaccinesBought = response
-          // console.log(this.vaccinesBought)
           this.updateAfricaTypes()
         })
     },
-     // New Function Written here that gets the Vaccine Sources
-    // async  get_vaccine_sources() {
-    //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-sources.php')
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //       vaxSources = response
-  
-    //       vaxSources.forEach((v) => {
-    //         vaxSourcesList.forEach((d) => {
-    //           v[d] = +v[d]
-    //         })
-    //       })
-  
-    //       vaxSourcesList.forEach((d) => {
-    //         africaSources[d] = vaxSources.reduce((total, number) => {
-    //           return total + +number[d]
-    //         }, 0)
-    //       })
-    //     })
-    // },
-
     
     async getVaccinesReceived() {
       await fetch(
@@ -197,43 +185,22 @@ const vm = new Vue({
         })
     },
 
-    // New Function Written here that gets the Vaccine Types
-    // async  get_vaccine_types() {
-    //   await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php')
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //       vaxTypes = response
-    //       vaxTypes.forEach((v) => {
-    //         vaxTypesList.forEach((d) => {
-    //           v[d] = +v[d]
-    //         })
-    //       })
-  
-    //       vaxTypesList.forEach((d) => {
-    //         africaTypes[d] = vaxTypes.reduce((total, number) => {
-    //           return total + +number[d]
-    //         }, 0)
-    //       })
-    //     })
-    // },
-
     async getAfricaOverview() {
       await fetch(
         'https://api.mediahack.co.za/adh/vaccine-tracker/africa-overview.php'
       )
         .then((data) => data.json())
         .then((data) => {
-          console.log('currentOverview', data)
           data.forEach((d) => {
             d.date_of_report = d.date
           })
           this.africaOverview = data[0]
           this.currentOverview = data[0]
           this.africaOverviewTypes = data[0]
-          //console.log('currentOverview', data[0] )
         })
         this.updateAfricaTypes()
     },
+
     async getCountries() {
       await fetch(this.countriesUrl)
         .then((data) => data.json())
@@ -242,61 +209,87 @@ const vm = new Vue({
         })
     },
 
-    addAfricaMap() {
-      let map = L.map('map', {
-        zoomControl: false,
-        scrollWheelZoom: false,
-        dragging: false,
-        zoomSnap: 0.1,
-      }).setView([0, 0], 14)
-      // var map = L.map('map').setView([51.505, -0.09], 13)
+    async addAfricaMap() {
 
-      let africaMap = L.geoJSON(africa, {
-        onEachFeature: this.onEachFeature,
-        style: this.mapStyle,
-      }).addTo(map)
-      map.fitBounds(africaMap.getBounds())
+      await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-all-countries-new.php')
+      .then((data) => data.json())
+      .then((data) => {
+        this.mapData = data;
+        
+        let map = L.map('map', {
+          zoomControl: false,
+          scrollWheelZoom: false,
+          dragging: false,
+          zoomSnap: 0.1,
+        }).setView([0, 0], 14)
+  
+        let africaMap = L.geoJSON(africa, {
+          onEachFeature: this.onEachFeature,
+          style: this.mapStyle,
+        }).addTo(map)
+        map.fitBounds(africaMap.getBounds());
+
+      })
+
     },
+
     hover(feature) {
-      // this.tooltip.style.left = feature.originalEvent.clientX + 100 + 'px'
-      // this.tooltip.style.top = feature.originalEvent.clientY + 100 + 'px'
+      let iso = feature.target.feature.properties.ADM0_A3;
 
-      //Set current overview to hovered country
-      let iso = feature.target.feature.properties.ADM0_A3
-      this.getCurrentHover(iso)
-      let flag
-      flag = this.convertCode(
-        feature.target.feature.properties.ADM0_A3
-      )[0].iso_2.toLowerCase()
-      flag = `https://hosted.mediahack.co.za/flags/${flag}.svg`
+      if(iso != 'SAH' && iso != 'ERI' && iso != 'SOL') {
 
-      this.tooltipContent = `<div class='title'><div class="flag"></div>
-      <div class="title-text">${feature.target.feature.properties.NAME_LONG}</div><br>
-      <div class="vaccine-stats"><span class="vaccine-title">Vaccinations per 100 : <span class="vaccine-digit" style="font-weight: 400;">${this.currentHover.total_vaccinations_per_hundred}</span></span></div><br>
-      <div class="vaccine-stats"><span class="vaccine-title">Total Vaccinations : <span class="vaccine-digit" style="font-weight: 400;">${(this.currentHover.total_vaccinations /1000000).toFixed(2)}M</span></span></div>
-      </div>`
-      // this.tooltipContent += `<div class="tooltip-content">
+        this.getCurrentHover(iso);
 
-      // </div>`
-      this.tooltip.style.display = 'block'
-      document.querySelector('.' + iso).style.fill = '#3A6775'
+        let flag;
 
-      setTimeout(() => {
-        document.querySelector('.flag').style.backgroundImage = `url(${flag})`
-      }, 50)
+        flag = this.convertCode(iso)[0].iso_2.toLowerCase();
+        flag = `https://hosted.mediahack.co.za/flags/${flag}.svg`;
+
+        let countryData = _.find(this.mapData, (d) => { return d.iso_code == iso });
+
+        if(countryData != undefined) {
+
+          let parse = d3.format('.2s');
+
+          this.tooltipContent = `<div class='title'><div class="flag"></div>
+          <div class="title-text">${countryData.country}</div><br>
+          <div class="vaccine-stats"><span class="vaccine-title">Vaccinations per 100 : <span class="vaccine-digit" style="font-weight: 400;">${parse(parseFloat(countryData.per_100))}</span></span></div><br>
+          <div class="vaccine-stats"><span class="vaccine-title">Total Vaccinations : <span class="vaccine-digit" style="font-weight: 400;">${parse(parseFloat(countryData.total_doses).toFixed(2))}</span></span></div>
+          </div>`;
+
+          this.tooltip.style.display = 'block';
+
+        }
+
+        document.querySelector('.' + iso).style.fill = '#3A6775';
+
+        setTimeout(() => {
+          document.querySelector('.flag').style.backgroundImage = `url(${flag})`
+        }, 50)
+
+        }
+
     },
+
     move(feature) {
       this.tooltip.style.left = feature.originalEvent.clientX + 10 + 'px'
       this.tooltip.style.top = feature.originalEvent.clientY + 10 + 'px'
     },
+
     out(feature) {
+      
       this.tooltip.style.display = 'none'
-      let iso = feature.target.feature.properties.ADM0_A3
-      document.querySelector('.' + iso).style.fill = '#094151'
+      
+      let iso = feature.target.feature.properties.ADM0_A3;
+      let originalColor = feature.target.options.fillColor;
+
+      document.querySelector('.' + iso).style.fill = originalColor;
     },
+
     click(feature) {
       this.showCountry(feature.target.feature.properties.ADM0_A3)
     },
+
     onEachFeature(feature, layer) {
       layer.on({
         mouseover: this.hover,
@@ -305,17 +298,20 @@ const vm = new Vue({
         click: this.click,
       })
     },
+
     mapStyle(feature) {
+
       let fillColor = '#094151'
-      let borderColor = '#eee'
-      // let country = countryStatus.filter(
-      //   (d) => d.iso === feature.properties.ADM0_A3
-      // )
-      // if (country.length > 0) {
-      //   fillColor = mapColor
-      // }
+
+      let countryData = _.find(this.mapData, (d) => { return d.iso_code == feature.properties.ADM0_A3 });
+
+      if(countryData != undefined) {
+        fillColor = this.absScale.getColor(countryData.per_100);
+      }
+      
+
       return {
-        color: borderColor,
+        color: '#eee',
         fillColor: fillColor,
         weight: 1,
         opacity: 1,
@@ -324,6 +320,9 @@ const vm = new Vue({
         className: feature.properties.ADM0_A3 + ' country',
       }
     },
+
+
+
     updateAfrica() {
       let vaccines = [
         'Covaxin',
@@ -348,9 +347,9 @@ const vm = new Vue({
         this.africaOverviewSource = this.africaOverview
 
       })
-      console.log('africaOverviewSource', this.africaOverviewSource)
       
     },
+
     updateAfricaTypes() {
       let sources = [
         'covax', 
@@ -365,10 +364,10 @@ const vm = new Vue({
         this.africaOverviewTypes[v] = count
 
       })
-      console.log('africaOverviewTypes', this.africaOverviewTypes)
     },
+  
+
     embeddedCode(){
-      console.log('embeded clicked')
       var url = window.location.href;
       var div = document.createElement('textarea');
       var iframe = `<iframe width="700" height="400" src="${url}" frameBorder="0"></iframe>`;
@@ -376,7 +375,7 @@ const vm = new Vue({
       var element = document.getElementById('iframe');
     
       if (!element.hasChildNodes()) {
-      // It has at least one
+
         element.appendChild(div);
       }
     
@@ -386,6 +385,9 @@ const vm = new Vue({
       myModal.show();
     },
   },
+
+  
+
   mounted() {
     this.tooltip = document.querySelector('.tooltip')
     Promise.all([
@@ -393,8 +395,8 @@ const vm = new Vue({
       this.getVaccinesBought(),
       this.getVaccinesReceived(),
       this.getCountries(),
-      this.addAfricaMap(),
-      // this.updateAfrica(),
+      this.absScale.setGradient('#FFECEC','#329BC2').setMidpoint(50),
+      this.addAfricaMap()
      
     ]).then(() => {
       this.loading = false
