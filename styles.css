@@ -256,27 +256,33 @@ svg {
 .map-legend {
   position: absolute;
   bottom: 0;
-  left: 2em;
+  left: 1.5em;
 }
 
-.chart-scale div {
+.map-legend-title {
+  margin-bottom: 0.5em;
+}
+
+.map-legend-tiles div {
   display: inline-block
 }
 
-.bubble {
-  width: 20px;
-  height: 10px;
-  border-radius: 2px;
-  margin-right: 0.5em;
+.map-legend-bucket {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  margin-right: 0 !important;
+  padding: 0;
+  top: 0.2em;
 }
 
-.bubble-top {
+/* .bubble-top {
   background: #329BC2;
 }
 
 .bubble-bottom {
   background: #FFECEC;
-}
+} */
 
 .tooltip {
   position: fixed;

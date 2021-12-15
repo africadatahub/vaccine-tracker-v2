@@ -162,14 +162,18 @@
       <section id="main">
         <div class="main-box left-main">
           <div id="map">
+
             <div class="map-legend">
-              <div class="chart-scale">
-                  <div class="bubble-top bubble"></div><div>100 per 100</div>
-              </div>
-              <div class="chart-scale">
-                  <div class="bubble-bottom bubble"></div><div>0 per 100</div>
+              <div class="map-legend-title">VACCINATIONS PER 100</div>
+              <div class="map-legend-tiles">
+                <div class="map-legend-label">0</div>
+                <div class="map-legend-buckets"></div>
+                <div class="map-legend-label">100</div>
               </div>
             </div>
+
+
+
           </div>
           <div class="info-panel">
             <div class="source-section-wrapper">
@@ -226,7 +230,8 @@
                   :style="{width: currentVaccinesBought.grand_total / currentVaccinesBought.grand_total * 100 + '%'}">
                 </div>
                 <div class="first-box-label">Total Vaccines Received</div>
-                <div class="first-box-value">{{ currentVaccinesBought.grand_total | formatMillions}}</div>
+                <!-- <div class="first-box-value">{{ currentVaccinesBought.grand_total | formatMillions}}</div> -->
+                <div class="first-box-value">{{currentVaccinesBought.donated + currentVaccinesBought.bought + currentVaccinesBought.covax | formatMillions}}</div>
               </div>
               <div class="item">
                 <div class="first-box-label">Total Vaccinations per 100 People</div>

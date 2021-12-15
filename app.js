@@ -229,6 +229,11 @@ const vm = new Vue({
         }).addTo(map)
         map.fitBounds(africaMap.getBounds());
 
+        let buckets = '<div class="map-legend-bucket" style="background: ' + this.absScale.getColor(1) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(10) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(20) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(35) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(50) + '"></div>';
+
+        document.querySelector('.map-legend-buckets').insertAdjacentHTML('beforeend', buckets);
+
+
       })
 
     },
@@ -301,7 +306,7 @@ const vm = new Vue({
 
     mapStyle(feature) {
 
-      let fillColor = '#094151'
+      let fillColor = '#fff'
 
       let countryData = _.find(this.mapData, (d) => { return d.iso_code == feature.properties.ADM0_A3 });
 
