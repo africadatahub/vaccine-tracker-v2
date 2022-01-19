@@ -229,7 +229,7 @@ const vm = new Vue({
         }).addTo(map)
         map.fitBounds(africaMap.getBounds());
 
-        let buckets = '<div class="map-legend-bucket" style="background: ' + this.absScale.getColor(1) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(10) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(20) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(35) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(50) + '"></div>';
+        let buckets = '<div class="map-legend-bucket" style="background: ' + this.absScale.getColor(1) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(25) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(50) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(75) + '"></div><div class="map-legend-bucket" style="background: ' + this.absScale.getColor(100) + '"></div>';
 
         document.querySelector('.map-legend-buckets').insertAdjacentHTML('beforeend', buckets);
 
@@ -400,11 +400,11 @@ const vm = new Vue({
       this.getVaccinesBought(),
       this.getVaccinesReceived(),
       this.getCountries(),
-      this.absScale.setGradient('#FFECEC','#329BC2').setMidpoint(50),
+      this.absScale.setGradient('#FFECEC','#329BC2').setMidpoint(100),
       this.addAfricaMap()
-     
     ]).then(() => {
-      this.loading = false
+      this.loading = false;
+      
     })
   },
 })
