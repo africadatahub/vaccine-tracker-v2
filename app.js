@@ -5,6 +5,13 @@ import { africa } from './data/africajson';
 import { countryCodes } from './data/country-codes';
 import Gradient from 'javascript-color-gradient';
 import _ from 'lodash';
+import countries from "./mediahack/countries-json.json"
+import africanOverview from "./mediahack/africa-overview-json.json"
+import vaccineSources from "./mediahack/vaccination-sources.json"
+import vaccinationsByCountry from "./mediahack/vaccinations-by-country-json.json"
+import vaccinationAllCountries from "./mediahack/vaccinations-all-countries-new-json.json"
+
+
 
 let parseTime = d3.timeParse('%Y-%m-%d')
 let formatDate = d3.timeFormat('%e %B, %Y')
@@ -92,7 +99,10 @@ const vm = new Vue({
       await fetch(
         `https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-by-country.php?cc=${iso}`
       )
-        .then((data) => data.json())
+        .then((data) => 
+        //data.json()
+        vaccinationsByCountry
+        )
         .then((data) => {
           data[data.length - 1].total_vaccinations =
             data[data.length - 1].total_vaccine_doses_to_date
@@ -104,6 +114,8 @@ const vm = new Vue({
           data[data.length - 1].total_vaccinations = +data[data.length - 1].total_vaccinations
           this.currentHover= data[data.length - 1]
           
+        }).catch(()=>{
+          console.log("replace")
         })
     },
 
@@ -126,6 +138,7 @@ const vm = new Vue({
         +this.currentVaccinesBought.grand_total
 
       this.currentFlag = this.convertCode(iso)[0].iso_2.toLowerCase() + '.svg'
+
       let overview = fetch(
         `https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-by-country.php?cc=${iso}`
       )
@@ -140,6 +153,8 @@ const vm = new Vue({
             100
           ).toFixed(2)
           this.currentOverview = data[data.length - 1]
+        }).catch(()=>{
+          console.warn("replace with vaccinations by country data with iso parameter")
         })
     },
 
@@ -148,7 +163,10 @@ const vm = new Vue({
       await fetch(
         vaccine_sources
       )
-        .then((response) => response.json())
+        .then((response) =>
+         //response.json()
+         vaccineSources
+         )
         .then((response) => {
           response.forEach((d) => {
             
@@ -160,36 +178,44 @@ const vm = new Vue({
           })
           this.vaccinesBought = response
           this.updateAfricaTypes()
+        }).catch(()=>{
+          console.log("replace")
         })
     },
     
-    async getVaccinesReceived() {
-      await fetch(
-        'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php'
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          response.forEach(i=>{
-            i.Covaxin = +i.Covaxin
-            i.Johnson_and_Johnson = +i.Johnson_and_Johnson
-            i.Moderna = +i.Moderna
-            i.Oxford_AstraZeneca = +i.Oxford_AstraZeneca
-            i.Pfizer_BioNTech = +i.Pfizer_BioNTech
-            i.Sinopharm = +i.Sinopharm
-            i.Sinovac = +i.Sinovac
-            i.Sputnik_V = +i.Sputnik_V
-          })
-          this.vaccinesReceived = response.filter((d) => d.country !== '')
+    // async getVaccinesReceived() {
+    //   await fetch(
+    //     'https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-types.php'
+    //   )
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       response.forEach(i=>{
+    //         i.Covaxin = +i.Covaxin
+    //         i.Johnson_and_Johnson = +i.Johnson_and_Johnson
+    //         i.Moderna = +i.Moderna
+    //         i.Oxford_AstraZeneca = +i.Oxford_AstraZeneca
+    //         i.Pfizer_BioNTech = +i.Pfizer_BioNTech
+    //         i.Sinopharm = +i.Sinopharm
+    //         i.Sinovac = +i.Sinovac
+    //         i.Sputnik_V = +i.Sputnik_V
+    //       }).catch(()=>{
+    //         console.log("replace")
+    //       })
+
+    //       this.vaccinesReceived = response.filter((d) => d.country !== '')
           
-          this.updateAfrica()
-        })
-    },
+    //       this.updateAfrica()
+    //     })
+    // },
 
     async getAfricaOverview() {
       await fetch(
         'https://api.mediahack.co.za/adh/vaccine-tracker/africa-overview.php'
       )
-        .then((data) => data.json())
+        .then((data) => 
+        //data.json()
+        africanOverview
+        )
         .then((data) => {
           data.forEach((d) => {
             d.date_of_report = d.date
@@ -197,22 +223,33 @@ const vm = new Vue({
           this.africaOverview = data[0]
           this.currentOverview = data[0]
           this.africaOverviewTypes = data[0]
+        }).catch(()=>{
+          console.log("replace")
         })
+
         this.updateAfricaTypes()
     },
 
     async getCountries() {
       await fetch(this.countriesUrl)
-        .then((data) => data.json())
+        .then((data) => 
+        //data.json()
+        countries
+        )
         .then((data) => {
           this.countries = data.filter((d) => d.location !== 'Saint Helena')
+        }).catch(()=>{
+          console.warn("failed to load countries: line 241")
         })
     },
 
     async addAfricaMap() {
 
       await fetch('https://api.mediahack.co.za/adh/vaccine-tracker/vaccinations-all-countries-new.php')
-      .then((data) => data.json())
+      .then((data) => 
+      //data.json()
+      vaccinationAllCountries
+      )
       .then((data) => {
         this.mapData = data;
         
@@ -234,6 +271,8 @@ const vm = new Vue({
         document.querySelector('.map-legend-buckets').insertAdjacentHTML('beforeend', buckets);
 
 
+      }).catch(()=>{
+        console.log("replace")
       })
 
     },
@@ -398,7 +437,7 @@ const vm = new Vue({
     Promise.all([
       this.getAfricaOverview(),
       this.getVaccinesBought(),
-      this.getVaccinesReceived(),
+     // this.getVaccinesReceived(),
       this.getCountries(),
       this.absScale.setGradient('#FFECEC','#329BC2').setMidpoint(100),
       this.addAfricaMap()
