@@ -15,7 +15,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./ "
+    "build": "parcel build --no-optimize index.html --public-url ./ "
   },
   "author": "",
   "license": "ISC",
