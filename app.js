@@ -88,7 +88,6 @@ const vm = new Vue({
           this.maxSources = +this.currentVaccinesBought[d]
         //this.maxSources = 0
       })
-      console.log(this.maxSources, "maxSources")
     },
 
     resetSelection() {
@@ -124,7 +123,7 @@ const vm = new Vue({
           ).toFixed(2)
           data[data.length - 1].total_vaccinations = +data[data.length - 1].total_vaccinations
           this.currentHover= data[data.length - 1]
-          console.log(this.currentHover, "hover data")
+         
         }).catch((err)=>{
           console.log(err)
         })
