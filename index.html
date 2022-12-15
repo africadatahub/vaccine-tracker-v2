@@ -98,8 +98,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="nav-item dropdown ml-0" @click="countryDropdown = !countryDropdown">
             Choose Country<img class="select-arrow" alt="down-arrow" src="images/down-arrow-white.svg">
             <div class="dropdown-menu" v-if="countryDropdown">
-              <div class="dropdown-item" v-for="country in countries" @click="showCountry(country.iso_code)">{{
-                country.location }}</div>
+              <div class="dropdown-item" v-for="country in countries_array" @click="showCountry(country.iso)">{{
+                country.countries }}</div>
             </div>
           </div>
           <div class="nav-item chart-hidden">[ Nav Item ]</div>
