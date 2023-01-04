@@ -1,0 +1,43 @@
+.information {
+    h1 {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        letter-spacing: 0.25px;
+        color: #272E34;
+        margin-bottom: 5px;
+    }
+    b{
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 130%;
+        letter-spacing: 0.5px;
+        color: #3F4A52;
+    }
+    p {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 130%;
+        letter-spacing: 0.5px;
+        color: #3F4A52;
+        margin-top: 20px;
+        margin-bottom: 22px;
+    }
+    .adb{
+        color: #848484;
+        font-family: 'Open Sans';
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        text-decoration-line: underline;
+        position: relative;
+        top: -21px;
+    }
+}

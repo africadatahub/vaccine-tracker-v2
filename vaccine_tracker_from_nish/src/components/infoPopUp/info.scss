@@ -1,0 +1,43 @@
+.info {
+    margin-left: 10px;
+    margin-left: 10px;
+    a {cursor: pointer;}
+    &-popup {
+    width: 300px;
+    // height: 278px;
+    background: #FFFFFF;
+    opacity: 0.95;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    position: absolute;
+    z-index: 10000;
+    padding: 25px 20px;
+    top: 12px;
+    margin-left: 10px;
+    @media (max-width:768px) {
+        width: 100%;
+        top: 30px;
+        left: 0;
+        }
+    h1 {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    p {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20.8px;
+        letter-spacing: 0.5px;
+        color: #474747;
+    }
+
+    }
+}

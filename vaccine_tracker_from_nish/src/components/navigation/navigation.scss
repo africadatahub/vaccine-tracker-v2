@@ -1,0 +1,321 @@
+/* Mobile */
+/* Tablet */
+.navigation {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 10001;
+	transition: 0.2s all ease-in-out;
+	background: white;
+	padding: 0 40px;
+	// border-bottom: 1px solid #E8E8E8;
+    // box-shadow: 0px 6px 14px rgb(0 0 0 / 10%);
+    //height: 76px;
+    // .nav-container {
+    //    // max-width: 1352px !important;
+	//    @media (max-width: 1648px) {
+	// 	max-width: 930px !important;
+	//    }
+    // }
+	// .navbar {
+	// 	height: 76px;
+	// 	padding: 5px;
+	// }
+	.navbar-collapse {
+		justify-content: center;
+		margin: auto;
+		width: calc(100% - 150px);
+		.navbar-nav {
+			justify-content: flex-end;
+			width: 100%;
+			.nav-link {
+				margin: 11px 10px;
+				height: unset;
+				display: flex;
+				align-items: center;
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 22px;
+                letter-spacing: 0.1px;
+                color: #0B1941;
+				position: relative;
+                &.bold {
+                    font-weight: 700;
+                }
+				&.tag:after {
+					content: 'Dashboard';
+					position: absolute;
+					font-family: 'Open Sans';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 14px;
+					line-height: 130%;
+					letter-spacing: 0.5px;
+					color: #0B1941;
+					position: absolute;
+					left: 0px;
+					top: 46px;
+				}
+
+			}
+		}
+	}
+	// .navbar-brand {
+	// 	padding: 0;
+	// 	position: relative;
+	// 	z-index: 2;
+	// 	margin: 0 auto;
+	// }
+}
+// .navigation.box-shadow {
+// 	box-shadow: 0px 3px 6px #000 0D;
+// }
+// .navigation.fill {
+// 	background-color: white;
+// 	height: 70px;
+// }
+// .navigation.hide {
+// 	top: -70px;
+// }
+// .navigation.nav_light {
+// 	* {
+// 		color: white;
+// 	}
+// 	.navbar-toggler-line {
+// 		background-color: white;
+// 	}
+// }
+// .navigation.nav_dark {
+// 	.navbar-toggler-line {
+// 		background-color: #2f2d41;
+// 	}
+// }
+.navigation.nav_mobile_expanded {
+	box-shadow: 0px 3px 6px #000 0D;
+	+ {
+		* {
+			margin-top: calc(182px - 70px);
+		}
+	}
+	.navbar {
+		height: 182px;
+	}
+	.navbar-brand {
+		margin: auto;
+		text-align: center;
+		&:after {
+			content: '//';
+			display: block;
+			text-transform: uppercase;
+			font-size: 14px;
+			line-height: 22px;
+			margin-top: 5px;
+		}
+		img {
+			width: 206px;
+		}
+	}
+}
+.mobile-nav {
+	display: none;
+}
+@media (min-width: 480px) {
+	.navigation {
+		.nav-link.cta {
+			margin-top: -3px;
+			color: #3C4043;
+			border-radius: 30px;
+			padding-left: 15px;
+			padding-right: 15px;
+			background: transparent;
+			border: 1px solid #3C4043;
+		}
+	}
+}
+@media (max-width: 1024px) {
+	.mobile-nav {
+		float: left;
+		margin-left: 24px !important;
+		top: 20px;
+		display: block;
+	}
+	.navbar {
+		.active {
+			margin-bottom: 58px !important;
+			margin-top: 43px !important;
+			&::before {
+				content:'-----------';
+				position: absolute;
+				margin-top: 87px;
+			}
+		}
+	}
+	i.icon.fas.fa-times.navbar-toggler-times {
+		&::before {
+			font-family: "Font Awesome 5 Free";
+			content: '-----------';
+		}
+	}
+	.navigation {
+		padding: 0;
+		.navbar-collapse {
+            background: #FFFFFF;
+            opacity: 0.95;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+			z-index: 4;
+			padding: 0;
+			width: 100%;
+			top: 0;
+			right: -100%;
+			width: 100%;
+			left: unset;
+			position: fixed;
+			height: 100% !important;
+			display: block !important;
+			transition: 0.2s right ease-in-out;
+			text-align: right;
+			margin: 0;
+			+ {
+				.navbar-toggler {
+					>div {
+						display: none;
+					}
+				}
+			}
+			.navbar-nav {
+				margin-top: 70px;
+				flex-direction: column;
+				hr {
+					margin-left: 23px !important;
+					margin-right: 23px !important;
+				}
+				.socials {
+					@media (max-width:768px) {
+					margin: auto;
+					a {
+						svg {
+							font-size: 33px !important;
+						}
+					}
+					}
+					
+				}
+				.nav-link {
+                    font-family: 'Open Sans';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 44px;
+                    letter-spacing: -0.02em;
+                    color: #0B1941;
+					transition: 0.2s background-image ease-in-out;
+					margin: 0 24px 20px 24px;
+					&.vaccine-for-africa {
+						font-family: 'Open Sans';
+						font-style: normal;
+						font-weight: 400;
+						font-size: 20px;
+						line-height: 28px;
+						text-align: center;
+						letter-spacing: -0.02em;
+						text-decoration-line: underline;
+						color: #0B1941;
+					}
+					&:active {
+						background-color: #16151a 80;
+						background-image: linear-gradient(#16151a 80, #2a2836 0, #16151a 80);
+					}
+				}
+			}
+			.social {
+				margin: 10px 0 0 20px;
+				i {
+					color: #f3ed62;
+					margin: 0;
+					font-size: 18px;
+				}
+			}
+			.social-link {
+				&:nth-of-type(2) {
+					margin: auto 20px;
+				}
+			}
+		}
+		.navbar-collapse.show {
+			right: -60%;
+			+ {
+				.navbar-toggler {
+					>span {
+						background: #000000;
+						margin: 4px auto;
+						height: 3px;
+						&:nth-of-type(1) {
+							transform: rotate(45deg);
+							top: 6px;
+							position: relative;
+						}
+						&:nth-of-type(2) {
+							width: 0;
+						}
+						&:nth-of-type(3) {
+							transform: rotate(135deg);
+							bottom: 8px;
+							position: relative;
+						}
+					}
+					>div {
+						display: block;
+					}
+				}
+			}
+		}
+		.navbar-toggler {
+			z-index: 5;
+			width: 25px;
+			padding: 0;
+			outline: none;
+			border: 0;
+			display: block;
+			&:focus {
+				box-shadow: none !important;
+			}
+		}
+		.navbar-toggler-line {
+			width: 100%;
+			height: 3px;
+			background: #3C4043;
+			display: block;
+			margin: 5px auto;
+			transition: 0.2s all ease-in-out;
+		}
+	}
+}
+@media (max-width:768px) {
+	.navigation {
+		.navbar-toggler-times {
+			-webkit-text-stroke: 1px #fff;
+			font-size: 24px;
+		}
+	}
+}
+@media (max-width: 480px) {
+	.navigation {
+		.navbar-collapse.show {
+			right: 0%;
+		}
+	}
+}
+@media (max-width: 320px) {
+	.navigation {
+		.navbar-collapse {
+			.navbar-nav {
+				.nav-link {
+					font-size: 20px;
+					margin: 0 20px 15px;
+				}
+			}
+		}
+	}
+}

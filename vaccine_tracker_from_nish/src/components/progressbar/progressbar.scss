@@ -1,0 +1,43 @@
+.progressbar {
+    padding: 2.5px 0;
+    position: relative;
+    margin: 6px 0;
+    .first-box-label {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        color: #929292;
+        margin-left: 8px;
+        z-index: 1;
+    }
+    .first-box-value {
+            position: absolute;
+            right: 0;
+            z-index: 1;
+            text-align: right;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 15px;
+            color: #000;
+            padding-right: 8px;
+    }
+    .bar {
+        position: absolute;
+        background: #87E4D0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 6px;
+        &.covax,&.bought,&.donation {background-color: #CFF4EC;}
+        &.vaccines {background-color: #ABEDDF;}
+        &.country {background-color: #C8E6F6;}
+        &.covaxin {background-color:#C8E6F6 ;}
+        &.jj {background-color:#F4BB8C ;}
+        &.moderna {background-color:#9BDABA ;}
+        &.astra {background-color:#FFE79B ;}
+        &.pfizer {background-color:#B6B6B6 ;}
+        &.sinopharm {background-color: #D9F0D3 }
+        &.sputnik {}
+    }
+
+}

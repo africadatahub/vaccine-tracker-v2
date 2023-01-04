@@ -1,0 +1,36 @@
+table {
+    tr {
+        th {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: #848484;
+            width: 200px;
+            text-align: center;
+        }
+        td {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 25px;
+            color: #474747;
+            text-align: center;
+            span {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 13px;
+                line-height: 25px;
+                &.confirmed {
+                    color: #50B2C0;
+                }
+                &.deaths {
+                    color: #EF5B5B;
+                }
+            }
+        }
+    }
+}

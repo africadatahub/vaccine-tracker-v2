@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ADH-Vaccine Tracker</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,500,700,800" rel="stylesheet" type="text/css">
+  <link href="adh-favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WQ28RGC');</script>
+    <!-- End Google Tag Manager -->
+
+  <script>
+    window.Userback = window.Userback || {};
+    Userback.access_token = '7688|59514|ha8YH6mRJBS2dBoMh4GPd5I1qncr7GqYxyNMjBOSgrHO5Z1b44';
+    (function(d) {
+        var s = d.createElement('script');s.async = true;
+        s.src = 'https://static.userback.io/widget/v1.js';
+        (d.head || d.body).appendChild(s);
+    })(document);
+</script>
+
+</head>
+
+<body style="background-color:#F0F2F4;">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ28RGC"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  <div id="root"></div>
+  <script type="module" src="index.jsx"></script>
+  <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+  <script>
+    var pymChild = new pym.Child({ polling: 1000 });
+  </script>
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <span>© 2021 Africa Data Hub. Open Cities Labs is a non-profit organisation DSD: 255-261NPO / PBO (18A): 930067929 <br>
+          The ADH project is Licensed under a Creative Commons Attribution 4.0 International License.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

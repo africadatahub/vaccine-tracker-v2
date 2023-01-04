@@ -6,7 +6,7 @@ body {
   font-size: 90%;
   margin: 0px;
 }
-/* .loading-overlay {
+.loading-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -15,7 +15,7 @@ body {
   background: #fff;
   z-index: 10000;
   text-align: center;
-} */
+}
 .loading-overlay img {
   width: 100px;
   margin-top: 30vh;
@@ -112,7 +112,7 @@ h3.title{
 .chart-hidden {
   display: none;
 }
-nav {
+/* nav {
   display: grid;
   grid-template-columns: minmax(200px, auto) minmax(100px, 280px) 1fr 1fr;
   grid-gap: 20px;
@@ -130,7 +130,7 @@ nav {
 }
 .nav-item:hover {
   background: #235563;
-}
+} */
 .select-arrow {
   float: right;
   margin-top: 10px;
@@ -141,19 +141,7 @@ nav {
 .dropdown {
   display: relative;
 }
-.dropdown-menu {
-  position: absolute;
-  left: 0px;
-  top: 40px;
-  background: #fff;
-  height: 200px;
-  overflow-y: auto;
-  width: 250px;
-  z-index: 4000;
-  color: #235563;
-  font-size: 110%;
-  display: block;
-}
+
 .dropdown-items {
   position: absolute;
   top: 45px;
@@ -253,13 +241,13 @@ svg {
   position: relative;
 }
 
-.map-legend {
+/* .map-legend {
   position: absolute;
   bottom: 0;
   left: 1.5em;
-}
+} */
 
-.map-legend-title {
+/* .map-legend-title {
   margin-bottom: 0.5em;
 }
 
@@ -274,7 +262,7 @@ svg {
   margin-right: 0 !important;
   padding: 0;
   top: 0.2em;
-}
+} */
 
 /* .bubble-top {
   background: #329BC2;
@@ -678,7 +666,7 @@ footer span{
   letter-spacing: -0.02em;
   color: #155263;
 }
-/*.vaccine-digit{
+/* .vaccine-digit{
   font-weight: 400;
   font-size: 12px;
 } */

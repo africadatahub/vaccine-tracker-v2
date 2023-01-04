@@ -1,0 +1,307 @@
+[
+    {
+      "_id": 1,
+      "countries": "Africa",
+      "iso": "OWID_AFR"
+    },
+    {
+      "_id": 2,
+      "countries": "North Africa",
+      "iso": "North Africa"
+    },
+    {
+      "_id": 3,
+      "countries": "Southern Africa",
+      "iso": "Southern Africa"
+    },
+    {
+      "_id": 4,
+      "countries": "Central Africa",
+      "iso": "Central Africa"
+    },
+    {
+      "_id": 5,
+      "countries": "West Africa",
+      "iso": "West Africa"
+    },
+    {
+      "_id": 6,
+      "countries": "East Africa",
+      "iso": "East Africa"
+    },
+    {
+      "_id": 7,
+      "countries": "Algeria",
+      "iso": "DZA"
+    },
+    {
+      "_id": 8,
+      "countries": "Angola",
+      "iso": "AGO"
+    },
+    {
+      "_id": 9,
+      "countries": "Benin",
+      "iso": "BEN"
+    },
+    {
+      "_id": 10,
+      "countries": "Botswana",
+      "iso": "BWA"
+    },
+    {
+      "_id": 11,
+      "countries": "Burkina Faso",
+      "iso": "BFA"
+    },
+    {
+      "_id": 12,
+      "countries": "Burundi",
+      "iso": "BDI"
+    },
+    {
+      "_id": 13,
+      "countries": "Cameroon",
+      "iso": "CMR"
+    },
+    {
+      "_id": 14,
+      "countries": "Cape Verde",
+      "iso": "CPV"
+    },
+    {
+      "_id": 15,
+      "countries": "Central African Republic",
+      "iso": "CAF"
+    },
+    {
+      "_id": 16,
+      "countries": "Chad",
+      "iso": "TCD"
+    },
+    {
+      "_id": 17,
+      "countries": "Comoros",
+      "iso": "COM"
+    },
+    {
+      "_id": 18,
+      "countries": "Congo Republic",
+      "iso": "COG"
+    },
+    {
+      "_id": 19,
+      "countries": "Cote d'Ivoire",
+      "iso": "CIV"
+    },
+    {
+      "_id": 20,
+      "countries": "DR Congo",
+      "iso": "COD"
+    },
+    {
+      "_id": 21,
+      "countries": "Djibouti",
+      "iso": "DJI"
+    },
+    {
+      "_id": 22,
+      "countries": "Egypt",
+      "iso": "EGY"
+    },
+    {
+      "_id": 23,
+      "countries": "Equatorial Guinea",
+      "iso": "GNQ"
+    },
+    {
+      "_id": 24,
+      "countries": "Eritrea",
+      "iso": "ERI"
+    },
+    {
+      "_id": 25,
+      "countries": "Eswatini",
+      "iso": "SWZ"
+    },
+    {
+      "_id": 26,
+      "countries": "Ethiopia",
+      "iso": "ETH"
+    },
+    {
+      "_id": 27,
+      "countries": "Gabon",
+      "iso": "GAB"
+    },
+    {
+      "_id": 28,
+      "countries": "Gambia",
+      "iso": "GMB"
+    },
+    {
+      "_id": 29,
+      "countries": "Ghana",
+      "iso": "GHA"
+    },
+    {
+      "_id": 30,
+      "countries": "Guinea",
+      "iso": "GIN"
+    },
+    {
+      "_id": 31,
+      "countries": "Guinea-Bissau",
+      "iso": "GNB"
+    },
+    {
+      "_id": 32,
+      "countries": "Kenya",
+      "iso": "KEN"
+    },
+    {
+      "_id": 33,
+      "countries": "Lesotho",
+      "iso": "LSO"
+    },
+    {
+      "_id": 34,
+      "countries": "Liberia",
+      "iso": "LBR"
+    },
+    {
+      "_id": 35,
+      "countries": "Libya",
+      "iso": "LBY"
+    },
+    {
+      "_id": 36,
+      "countries": "Madagascar",
+      "iso": "MDG"
+    },
+    {
+      "_id": 37,
+      "countries": "Malawi",
+      "iso": "MWI"
+    },
+    {
+      "_id": 38,
+      "countries": "Mali",
+      "iso": "MLI"
+    },
+    {
+      "_id": 39,
+      "countries": "Mauritania",
+      "iso": "MRT"
+    },
+    {
+      "_id": 40,
+      "countries": "Mauritius",
+      "iso": "MUS"
+    },
+    {
+      "_id": 41,
+      "countries": "Morocco",
+      "iso": "MAR"
+    },
+    {
+      "_id": 42,
+      "countries": "Mozambique",
+      "iso": "MOZ"
+    },
+    {
+      "_id": 43,
+      "countries": "Namibia",
+      "iso": "NAM"
+    },
+    {
+      "_id": 44,
+      "countries": "Niger",
+      "iso": "NER"
+    },
+    {
+      "_id": 45,
+      "countries": "Nigeria",
+      "iso": "NGA"
+    },
+    {
+      "_id": 46,
+      "countries": "Rwanda",
+      "iso": "RWA"
+    },
+    {
+      "_id": 47,
+      "countries": "Saint Helena",
+      "iso": "SHN"
+    },
+    {
+      "_id": 48,
+      "countries": "Sao Tome & Principe",
+      "iso": "STP"
+    },
+    {
+      "_id": 49,
+      "countries": "Senegal",
+      "iso": "SEN"
+    },
+    {
+      "_id": 50,
+      "countries": "Seychelles",
+      "iso": "SYC"
+    },
+    {
+      "_id": 51,
+      "countries": "Sierra Leone",
+      "iso": "SLE"
+    },
+    {
+      "_id": 52,
+      "countries": "Somalia",
+      "iso": "SOM"
+    },
+    {
+      "_id": 53,
+      "countries": "South Africa",
+      "iso": "ZAF"
+    },
+    {
+      "_id": 54,
+      "countries": "South Sudan",
+      "iso": "SSD"
+    },
+    {
+      "_id": 55,
+      "countries": "Sudan",
+      "iso": "SDN"
+    },
+    {
+      "_id": 56,
+      "countries": "Tanzania",
+      "iso": "TZA"
+    },
+    {
+      "_id": 57,
+      "countries": "Togo",
+      "iso": "TGO"
+    },
+    {
+      "_id": 58,
+      "countries": "Tunisia",
+      "iso": "TUN"
+    },
+    {
+      "_id": 59,
+      "countries": "Uganda",
+      "iso": "UGA"
+    },
+    {
+      "_id": 60,
+      "countries": "Zambia",
+      "iso": "ZMB"
+    },
+    {
+      "_id": 61,
+      "countries": "Zimbabwe",
+      "iso": "ZWE"
+    }
+  ]
